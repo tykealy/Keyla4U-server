@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'account_role_id'
     ];
 
     /**
@@ -41,4 +43,26 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function favorite(){
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function reservation(){
+        return $this->hasMany(Reservation::class);
+    }
+
+    public function account_type(){
+        return $this->belongsTo(AccountType::class);
+    }
+
+    public function court(){
+        return $this->hasMany(Court::class);
+    }
+
+    public function club(){
+        return $this->hasOne(Club::class);
+    }
 }
+

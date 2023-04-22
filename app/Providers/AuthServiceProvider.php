@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Providers;
-
-// use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +21,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('CanAccessDashboard', function (User $user) {
+            if($user->account_role_id == 0 || $user->account_role_id == 1){
+                return true;
+            }
+            return false;
+        });
     }
 }
