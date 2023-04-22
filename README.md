@@ -7,21 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Kayla4U is an innovative platform that allows users to easily book sports courts such as football and badminton. With a user-friendly interface, users can view a map of nearby sports clubs and check the availability and hourly rates of each court. With just one click, users can book their desired court and make a secure payment through the platform. In addition, users can also post on the website to find opponent teams for their games. Club owners and administrators can manage court availability and pricing through the platform. When a user books a court, both the club owner and user receive an SMS notification to confirm the booking. The system automatically updates court availability to ensure a seamless booking experience.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## About branch
+- create login ui & performent 
+- Perform logout
+- View Profile
+- Edit Profile
+- Authorize User Account 
 
-## Learning Laravel
+
+## Starting
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
