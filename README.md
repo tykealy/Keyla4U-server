@@ -39,6 +39,8 @@ php artisan migrate
 
 > User account --account_role_id == 2 --
 
+>password have to be encrypt
+
 **Only admin and SuperAdmin have authorize to access this site**
 
 ## Running project
