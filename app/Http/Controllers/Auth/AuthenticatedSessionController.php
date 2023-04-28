@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoginMail;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,9 +33,12 @@ class AuthenticatedSessionController extends Controller
             Auth::logout();
             abort(403);
         }else{
+            //sending mail to admin
+            $userEmail = Auth::User()->email;
+            Mail::to($userEmail)->send(new LoginMail());
+
             $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);
-            
+            return redirect()->intended(RouteServiceProvider::HOME);     
         }
     }
     
