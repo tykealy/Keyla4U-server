@@ -13,37 +13,23 @@ Kayla4U is an innovative platform that allows users to easily book sports courts
 
 ## About branch
 
--   create login ui & performent
--   Perform logout
--   View Profile
--   Edit Profile
--   Authorize User Account
+-   sending mail when admin login successfully
 
-# Starting
+# Things to do
 
-## creating database
+sign in with [mailstrap](https://mailtrap.io/)
 
-> create database name _keyla4U_
+go to email Testing > inbox > SMTP setting > Integrations >laravel 7+
 
-## migration
-
+copy the configuration and you can configure your mailing configuration by setting these values in the .env file in the root directory of your project.
 ```
-php artisan migrate
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=dbab18ce2fbcef
+MAIL_PASSWORD=c3b13822295bed
+MAIL_ENCRYPTION=tls
 ```
-
-## creating testing account for login
-
-**Goto database and insert User into User table;**
-
-> Superadmin account --account_role_id == 0 --
-
-> Admin account --account_role_id == 1 --
-
-> User account --account_role_id == 2 --
-
-> password have to be encrypt
-
-**Only admin and SuperAdmin have authorize to access this site**
 
 ## Running project
 
@@ -64,4 +50,4 @@ npm run build
 
 ## License
 
-[tk](https://github.com/tykeaboyloy)
+[vathan Tork](https://github.com/vathanatork)
