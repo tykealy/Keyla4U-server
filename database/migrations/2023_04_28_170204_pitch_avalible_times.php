@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
+        Schema::create('pitch_avalible_times', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
             $table->foreignId('pitch_id');
-            $table->foreignId('court_id');
-            $table->decimal('time',3,2);
+            $table->decimal('unit_price',5,2);
+            $table->date('week_day');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('pitch_avalible_times');
     }
 };

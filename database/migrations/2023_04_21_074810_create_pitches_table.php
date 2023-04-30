@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pitches', function (Blueprint $table) {
             $table->id();
             $table->integer('pitch_num');
-            $table->foreignId('club_id');
+            $table->string('size');
             $table->foreignId('court_id');
             $table->timestamps();
         });
