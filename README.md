@@ -13,11 +13,7 @@ Kayla4U is an innovative platform that allows users to easily book sports courts
 
 ## About branch
 
--   create login ui & performent
--   Perform logout
--   View Profile
--   Edit Profile
--   Authorize User Account
+-   migration and seeder
 
 # Starting
 
@@ -31,19 +27,18 @@ Kayla4U is an innovative platform that allows users to easily book sports courts
 php artisan migrate
 ```
 
-## creating testing account for login
-
-**Goto database and insert User into User table;**
-
-> Superadmin account --account_role_id == 0 --
-
-> Admin account --account_role_id == 1 --
-
-> User account --account_role_id == 2 --
-
-> password have to be encrypt
-
-**Only admin and SuperAdmin have authorize to access this site**
+## seeding data
+```
+php artisan db:seed --class=Account_typeTableSeeder
+php artisan db:seed --class=UserTableSeeder
+php artisan db:seed --class=ClubTableSeeder
+php artisan db:seed --class=FavoriteTableSeeder
+php artisan db:seed --class=Court_categoryTableSeeder
+php artisan db:seed --class=CourtTableSeeder
+php artisan db:seed --class=PitchTableSeeder
+php artisan db:seed --class=Pitch_avalible_timesTableSeeder
+php artisan db:seed --class=OrdersTableSeeder
+```
 
 ## Running project
 
