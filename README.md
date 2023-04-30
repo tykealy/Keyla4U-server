@@ -11,20 +11,21 @@
 
 Kayla4U is an innovative platform that allows users to easily book sports courts such as football and badminton. With a user-friendly interface, users can view a map of nearby sports clubs and check the availability and hourly rates of each court. With just one click, users can book their desired court and make a secure payment through the platform. In addition, users can also post on the website to find opponent teams for their games. Club owners and administrators can manage court availability and pricing through the platform. When a user books a court, both the club owner and user receive an SMS notification to confirm the booking. The system automatically updates court availability to ensure a seamless booking experience.
 
-## About branch
 
--   migration and seeder
+# Things to do
 
-# Starting
+sign in with [mailstrap](https://mailtrap.io/)
 
-## creating database
+go to email Testing > inbox > SMTP setting > Integrations >laravel 7+
 
-> create database name _keyla4U_
-
-## migration
-
+copy the configuration and you can configure your mailing configuration by setting these values in the .env file in the root directory of your project.
 ```
-php artisan migrate
+MAIL_MAILER=smtp
+MAIL_HOST=sandbox.smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=dbab18ce2fbcef
+MAIL_PASSWORD=c3b13822295bed
+MAIL_ENCRYPTION=tls
 ```
 
 ## seeding data
@@ -58,5 +59,3 @@ npm run build
 ##
 
 ## License
-
-[vathan tork](https://github.com/vathanatork)

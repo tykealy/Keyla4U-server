@@ -4,15 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Database\Eloquent\Casts\Json;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterMail;
 
 class RegisterUserApi extends Controller
 {
@@ -34,6 +32,8 @@ class RegisterUserApi extends Controller
         ]);
 
         event(new Registered($user));
+        $userEmail = $user->email;
+        Mail::to($userEmail)->send(new RegisterMail());
 
 
         return  response()->json([
