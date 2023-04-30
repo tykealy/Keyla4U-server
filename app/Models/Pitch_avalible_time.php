@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Time extends Model
+class Pitch_avalible_time extends Model
 {
     use HasFactory;
 
     protected $guarded = [''];
-
-    public function pitch(){
-        return $this->hasMany(Pitch::class);
-    }
 }

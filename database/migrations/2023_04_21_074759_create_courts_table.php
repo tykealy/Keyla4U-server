@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('courts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('court_category_id');
-            $table->foreignId('user_id');
-            $table->decimal('price',5,2);
+            $table->foreignId('club_id');
+            $table->time('open_time');
+            $table->time('close_time');
             $table->timestamps();
         });
     }
