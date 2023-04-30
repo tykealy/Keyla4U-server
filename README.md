@@ -59,5 +59,5 @@ npm run build
 ##
 
 ## License
-[tk] "https://github.com/tykeaboyloy"
+[tk](https://github.com/tykeaboyloy)
 
