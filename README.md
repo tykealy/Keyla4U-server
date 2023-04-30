@@ -59,4 +59,4 @@ npm run build
 
 ## License
 
-[tk](https://github.com/tykeaboyloy)
+[vathan tork](https://github.com/vathanatork)
