@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\ClubController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +18,9 @@ use App\Http\Controllers\HomeController;
 
 Route::get(
     '/',
-    [HomeController::class, "index"]
+    function(){
+        return redirect('/dashboard');
+    }
 )->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
@@ -29,32 +31,29 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Route::get(
-//     '/dashboard',
-//     [DashboardController::class, 'index']
-// )->middleware(['auth', 'verified'])->name('dashboard');
-
-
 // club
-Route::get('/club', function () {
-    return view('club.edit');
-})->name('club.edit');
 
-Route::get('club/index', function () {
-    return view('club.index');
-})->name('club.index');
+Route::resource('club', ClubController::class)->middleware('auth');
 
-Route::get('club/update', function () {
-    return view('club.edit');
-})->name('club.update');
+// Route::get('/club', function () {
+//     return view('club.edit');
+// })->name('club.edit');
 
-Route::get('club/create', function () {
-    return view('club.create');
-})->name('club.create');
+// Route::get('club/index', function () {
+//     return view('club.index');
+// })->name('club.index');
 
-Route::get('club/delete', function () {
-    return view('club.index');
-})->name('club.delete');
+// Route::get('club/update', function () {
+//     return view('club.edit');
+// })->name('club.update');
+
+// Route::get('club/create', function () {
+//     return view('club.create');
+// })->name('club.create');
+
+// Route::get('club/delete', function () {
+//     return view('club.index');
+// })->name('club.delete');
 
 // court category
 Route::get('/category', function () {

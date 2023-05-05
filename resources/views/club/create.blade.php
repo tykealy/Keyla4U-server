@@ -26,7 +26,7 @@ $club = [];
     </div>
     @endif
 
-    {!! Form::open(array('url'=>'club', 'files'=>'true')) !!}
+    {!! Form::open['route' => ['club.update', $user->id],'Method'=>'PUT','files'=>'true'] !!}
     {!! Form::label('name', 'Name:') !!}
     <br>
     {!! Form::text('name',null, array('class'=>'form-control','placeholder'=>"Sport center's name")) !!}
