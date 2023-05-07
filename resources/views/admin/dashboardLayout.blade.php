@@ -9,6 +9,7 @@
         <title>Dashboard</title>
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
         <link href="{{asset('css/style.css')}}" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -69,6 +70,10 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <a class="nav-link" href="{{route('club.index')}}">
+                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                    Club
+                                </a>
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Category
