@@ -32,13 +32,15 @@ class RegisterUserApi extends Controller
         ]);
 
         event(new Registered($user));
-        $userEmail = $user->email;
-        Mail::to($userEmail)->send(new RegisterMail());
 
-
-        return  response()->json([
-            'message' => 'User created successfully',
-            'user' => $user
-        ], 201);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $userEmail = $user->email;
+            Mail::to($userEmail)->send(new RegisterMail());
+            return  response()->json([
+                'message' => 'User created successfully',
+                'user' => $user
+            ], 201);
+        }
+        return response()->json(['error' => 'Unauthorised'], 401);
     }
 }
