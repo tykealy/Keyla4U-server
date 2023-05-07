@@ -62,6 +62,10 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                                 Profile
                             </a>
+                            <a class="nav-link" href="{{route('club.index')}}">
+                                <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                                Club
+                            </a>
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -70,10 +74,7 @@
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <a class="nav-link" href="{{route('club.index')}}">
-                                    <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                                    Club
-                                </a>
+                
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
                                         Category
