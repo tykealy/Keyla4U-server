@@ -12,6 +12,11 @@
         <x-widgets-card content="Club" class="bg-primary" href="{!!route('club.index')!!}"/>
         <x-widgets-card content="Available Pitch" class="bg-danger" href="{{route('available_pitch.index')}}"/>
     </div>
+    <div class="row gap-3 p-3">
+        <x-widgets-card content="Favorite" class="bg-success" href="{{route('favorite.index')}}"/>
+        <x-widgets-card content="Order" class="bg-info" href="{{route('order.index')}}"/>
+        <x-widgets-card content="User" class="bg-warning" href="{{route('user.index')}}"/>
+    </div>
 
 </div>
 

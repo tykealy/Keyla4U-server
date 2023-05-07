@@ -8,12 +8,12 @@ $categories = ['Football','Volleyball','Tennis'];
 
 <div class="card p-3 m-3">
 
-    <x-page-subtitle>Create</x-page-subtitle>
+    <x-page-subtitle>Update</x-page-subtitle>
 
-    @if(Session::has('ptich_create'))
+    @if(Session::has('ptich_update'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Primary!</strong> {!! session('pitch_create') !!}
+        <strong>Primary!</strong> {!! session('pitch_update') !!}
     </div>
     @endif
     @if (count($errors) > 0)
