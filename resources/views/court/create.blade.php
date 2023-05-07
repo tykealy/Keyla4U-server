@@ -33,11 +33,11 @@ $categories = ['football','volleyball'];
     {!! Form::label('category_id', 'Category:') !!}
     {!! Form::select('category_id',$categories,null ,array('class'=>'form-select')) !!}
     <br>
-    {!! Form::label('from', 'From:') !!}
-    <input class="form-control" type="time" value="" name="from">
+    {!! Form::label('start_time', "Start Time:") !!}
+    {!! Form::time('start_time',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('to', 'To:') !!}
-    <input class="form-control" type="time" value="" name="to">
+    {!! Form::label('end_time', "End Time:") !!}
+    {!! Form::time('end_time',null, array('class'=>'form-control')) !!}
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('court.index')}}" content="Back"/>
