@@ -43,11 +43,11 @@ $week_day = ['Mon - Fri','Sat - Sun','All week'];
     {!! Form::label('unit_price', 'Unit Price:') !!}
     {!! Form::text('unit_price',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('start_time', 'Start Time:') !!}
-    <input class="form-control" type="time" value="" name="start_time">
+    {!! Form::label('start_time', "Start Time:") !!}
+    {!! Form::time('start_time',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('end_time', 'End Time:') !!}
-    <input class="form-control" type="time" value="" name="end_time">
+    {!! Form::label('end_time', "End Time:") !!}
+    {!! Form::time('end_time',null, array('class'=>'form-control')) !!}
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('available_pitch.index')}}" content="Back"/>

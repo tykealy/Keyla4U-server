@@ -154,3 +154,23 @@ Route::get('user/delete', function () {
 Route::get('/favorite', function(){
     return view('favorite.index');
 })->name('favorite.index');
+
+//order
+Route::get('/order', function(){
+    return view('order.index');
+})->name('order.index');
+Route::get('order/create', function () {
+    return view('order.create');
+})->name('order.create');
+Route::get('order/update', function () {
+    return view('order.edit');
+})->name('order.update');
+
+//order detail
+
+Route::get('/order_detail', function(){
+    return view('order_detail.index');
+})->name('order_detail.index');
+Route::get('order_detail/create', function(){
+    return view('order_detail.create');
+})->name('order_detail.create');
