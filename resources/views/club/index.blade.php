@@ -5,12 +5,12 @@
 <div class="card p-3 m-3">              
     <div class= "d-flex align-items-center justify-content-between">
         <x-page-title title="Club" class="mb-3" />
-        <x-create-icon href="{{route('club.create')}}" />
+        <x-create-icon href="" />
     </div>
     <div class="p-3 border border-primary rounded mb-3">
         <span class="h2 fw-bold text-primary text-uppercase">Sport center's name: </span>
         <span class="h2">Blue Sport Center</span>
-        <span class="h5 ms-2" style="cursor: pointer"><a href="{{route('club.update')}}"><i class="fa-solid fa-pen"></i></a></span>
+        <span class="h5 ms-2" style="cursor: pointer"><a href=""><i class="fa-solid fa-pen"></i></a></span>
     </div>
     <x-page-subtitle>#Image</x-page-subtitle>
     <div>
@@ -23,8 +23,8 @@
     <div class="container-fluid mt-3">
         <div class="row gap-3">
             <x-widgets-card href="{{route('club.create')}}" class="bg-success" content="Create" />
-            <x-widgets-card href="{{route('club.update')}}" class="bg-primary" content="Update" />
-            <x-widgets-card href="{{route('club.delete')}}" class="bg-danger" content="Delete" />
+            <x-widgets-card href="" class="bg-primary" content="Update" />
+            <x-widgets-card href="" class="bg-danger" content="Delete" />
         </div>
     </div>
     <div>

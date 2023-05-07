@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ClubController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +19,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get(
-    '/',
-    [HomeController::class, "index"]
+    '/',function(){
+        return redirect('/dashboard');
+    }
 )->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
@@ -29,32 +32,15 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Route::get(
-//     '/dashboard',
-//     [DashboardController::class, 'index']
-// )->middleware(['auth', 'verified'])->name('dashboard');
-
-
 // club
-Route::get('/club', function () {
-    return view('club.edit');
-})->name('club.edit');
+    Route::resource('club', ClubController::class);
 
-Route::get('club/index', function () {
-    return view('club.index');
-})->name('club.index');
-
-Route::get('club/update', function () {
-    return view('club.edit');
-})->name('club.update');
-
-Route::get('club/create', function () {
-    return view('club.create');
-})->name('club.create');
-
-Route::get('club/delete', function () {
-    return view('club.index');
-})->name('club.delete');
+    // Route::get('/club',[ClubController::class,'edit'])->name('club.edit');
+    // Route::get('club/index',[ClubController::class,'index'])->name('club.index');
+    // Route::Put('club/update/{id}',[ClubController::class,'update'])->name('club.update');
+    // Route::get('club/create',[ClubController::class,'create'])->name('club.create');
+    // Route::get('club/delete',[ClubController::class,'delete'])->name('club.delete');
+    // Route::Post('club/store',[ClubController::class,'store'])->name('club.store');
 
 // court category
 Route::get('/category', function () {
@@ -74,11 +60,9 @@ Route::get('category/delete', function () {
 })->name('category.delete');
 
 //dashboard
-
 Route::get('dashboard',function(){
     return view('admin.dashboard');
 })->name('dashboard');
-
 
 // court 
 Route::get('/court', function () {
