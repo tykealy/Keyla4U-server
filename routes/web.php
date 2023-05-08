@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClubController;
+use App\Http\Controllers\CourtCategoryController;
 
 
 /*
@@ -43,21 +44,22 @@ require __DIR__ . '/auth.php';
     // Route::Post('club/store',[ClubController::class,'store'])->name('club.store');
 
 // court category
-Route::get('/category', function () {
-    return view('court_category.index');
-})->name('category.index');
+    Route::resource('court_category', CourtCategoryController::class);
+// Route::get('/category', function () {
+//     return view('court_category.index');
+// })->name('category.index');
 
-Route::get('category/create', function () {
-    return view('court_category.create');
-})->name('category.create');
+// Route::get('category/create', function () {
+//     return view('court_category.create');
+// })->name('category.create');
 
-Route::get('category/update', function () {
-    return view('court_category.edit');
-})->name('category.update');
+// Route::get('category/update', function () {
+//     return view('court_category.edit');
+// })->name('category.update');
 
-Route::get('category/delete', function () {
-    return view('court_category.index');
-})->name('category.delete');
+// Route::get('category/delete', function () {
+//     return view('court_category.index');
+// })->name('category.delete');
 
 //dashboard
 Route::get('dashboard',function(){

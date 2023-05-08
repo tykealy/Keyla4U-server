@@ -6,7 +6,7 @@ $category = [];
 @section('content')
 
 <div class="card p-3 m-3">
-    <x-page-subtitle>Create</x-page-subtitle>
+    <x-page-subtitle>Create Category</x-page-subtitle>
 
     @if(Session::has('category_create'))
     <div class="alert alert-primary alert-dismissible">
@@ -27,13 +27,13 @@ $category = [];
     </div>
     @endif
 
-    {!! Form::open(array('url'=>'category')) !!}
+    {!!Form::open(['route' => 'court_category.store', 'method' => 'POST']) !!}
     {!! Form::label('name', 'Name:') !!}
     <br>
-    {!! Form::text('name',null, array('class'=>'form-control','placeholder'=>"Category's name")) !!}
+    {!! Form::text('category_name',null, array('class'=>'form-control','placeholder'=>"Category's name")) !!}
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
-    <x-btn-danger href="{{route('category.index')}}" content="Back"/>
+    <x-btn-danger href="{{route('court_category.index')}}" content="Back"/>
     {!! Form::close() !!}
 </div>
 
