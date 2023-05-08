@@ -41,8 +41,6 @@ php artisan serve
 npm run build
 ```
 
-##
-
 ## License
-[tk](https://github.com/tykeaboyloy)
+[vathanatork](https://github.com/vathanatork)
 
