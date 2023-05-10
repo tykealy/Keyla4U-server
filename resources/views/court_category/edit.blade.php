@@ -1,13 +1,10 @@
-<?php
-$category = [];
-?>
 
 @extends('admin.dashboardLayout')
 
 @section('content')
 
 <div class="card p-3 m-3">
-    <x-page-subtitle>Update</x-page-subtitle>
+    <x-page-subtitle>Update category</x-page-subtitle>
 
     @if(Session::has('club_update'))
     <div class="alert alert-primary alert-dismissible">
@@ -28,13 +25,13 @@ $category = [];
     </div>
     @endif
 
-    {!! Form::model($category , array('route' => array('category.update', 1), 'method'=>'PUT')) !!}
+    {!! Form::model($category , array('route' =>['court_category.update',$category['id']], 'method'=>'PUT')) !!}
     {!! Form::label('name', 'Name:') !!}
     <br>
-    {!! Form::text('name',null, array('class'=>'form-control','placeholder'=>"Category's name")) !!}
+    {!! Form::text('category_name',$category['category_name'], array('class'=>'form-control','placeholder'=>"Category's name")) !!}
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
-    <x-btn-danger href="{{route('category.index')}}" content="Back"/>
+    <x-btn-danger href="{{route('court_category.index')}}" content="Back"/>
     {!! Form::close() !!}
 </div>
 

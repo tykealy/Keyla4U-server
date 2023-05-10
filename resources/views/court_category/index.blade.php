@@ -4,8 +4,8 @@
 <div class="card p-3 m-3">  
    
     <div class= "d-flex align-items-center justify-content-between mb-4">
-        <x-page-title title="Court" />
-        <x-create-icon href="{{route('category.create')}}" />
+        <x-page-title title="Court Category" />
+        <x-create-icon href="{{route('court_category.create')}}" />
     </div>
 
     {{ Form::open(array('url'=>'/search','method'=>'get')) }}
@@ -25,30 +25,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href="#">Football</a></td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('category.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
+            @if(count($categories) > 0)
+                <?php
+                $count = 1;
+                ?>
+                @foreach ($categories as $category)
+                    <tr>
+                    <td>{{ $count }}</td>
+                    <td>{{ $category->category_name }}</td>
+                    <td><a class="btn btn-primary btn-sm" href="{{ route('court_category.edit', ['court_category' => $category->id]) }}">Update</a></td>
+                    <td>
+                    {!! Form::open(['route'=>['court_category.destroy',$category->id],'method'=>'DELETE']) !!}
+                    {!! csrf_field() !!}
+                    {!! method_field('DELETE') !!}
                     <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#">Volleyball</a></td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('category.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
+                    {!! Form::close() !!} 
+                    </td>
+                    </tr>
+                    <?php $count++; ?>
+                @endforeach
+            @else
+                <tr><td colspan="4" class="text-center">No category</td></tr>
+            @endif
         </tbody>
     </table>
     <div>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('court_categories', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
             $table->string('category_name');
             $table->timestamps();
         });
