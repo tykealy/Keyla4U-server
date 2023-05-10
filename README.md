@@ -42,5 +42,5 @@ npm run build
 ##
 
 ## License
-[vathanTork](https://github.com/vathanatork)
+[tk](https://github.com/tykeaboyloy)
 
