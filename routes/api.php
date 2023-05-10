@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginApi;
 use App\Http\Controllers\Api\RegisterUserApi;
+use App\Http\Controllers\Api\ClubApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [RegisterUserApi::class, 'store']);
 Route::post('/login', [LoginApi::class, 'store']);
+
+Route::get('/clubs', [ClubApi::class, 'index']);
+Route::get('/clubs/{id}', [ClubApi::class, 'show']);
