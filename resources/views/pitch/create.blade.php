@@ -1,6 +1,4 @@
-<?php
-$categories = ['Football','Volleyball','Basketball'];
-?>
+
 @extends('admin.dashboardLayout')
 
 @section('content')
@@ -28,10 +26,14 @@ $categories = ['Football','Volleyball','Basketball'];
     </div>
     @endif
 
-    {!! Form::open(array('url'=>'pitch')) !!}
+    {!! Form::open(['route' => 'pitch.store', 'method' => 'POST']) !!}
 
-    {!! Form::label('category_id', 'Category:') !!}
-    {!! Form::select('category_id',$categories,null ,array('class'=>'form-select')) !!}
+    {!! Form::label('court_id', 'Court:') !!}
+    <select name="court_id" class="form-select">
+        @foreach ($courts as $court)
+            <option value="{{ $court->id }}">{{ $court->court_category->category_name }}</option>
+        @endforeach
+    </select>
     <br>
     {!! Form::label('pitch_num', "Pitch's number:") !!}
     {!! Form::text('pitch_num',null, array('class'=>'form-control')) !!}

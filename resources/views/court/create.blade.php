@@ -1,6 +1,6 @@
 <?php
 $court = [];
-$categories = ['football','volleyball'];
+
 ?>
 @extends('admin.dashboardLayout')
 
@@ -28,16 +28,16 @@ $categories = ['football','volleyball'];
     </div>
     @endif
 
-    {!! Form::open(array('url'=>'court')) !!}
+    {!! Form::open(['route' => 'court.store', 'method' => 'POST']) !!}
 
     {!! Form::label('category_id', 'Category:') !!}
-    {!! Form::select('category_id',$categories,null ,array('class'=>'form-select')) !!}
+    {!! Form::select('category_id', $categories->pluck('category_name', 'id'), null, ['class' => 'form-select']) !!}
     <br>
-    {!! Form::label('start_time', "Start Time:") !!}
-    {!! Form::time('start_time',null, array('class'=>'form-control')) !!}
+    {!! Form::label('open_time', "Start Time:") !!}
+    {!! Form::time('open_time',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('end_time', "End Time:") !!}
-    {!! Form::time('end_time',null, array('class'=>'form-control')) !!}
+    {!! Form::label('close_time', "End Time:") !!}
+    {!! Form::time('close_time',null, array('class'=>'form-control')) !!}
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('court.index')}}" content="Back"/>
