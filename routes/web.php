@@ -7,6 +7,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CourtCategoryController;
 use App\Http\Controllers\ClubsController;
+use App\Http\Controllers\CourtController;
+use App\Http\Controllers\PitchController;
 
 /*
 |--------------------------------------------------------------------------
