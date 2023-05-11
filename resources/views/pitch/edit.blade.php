@@ -1,7 +1,4 @@
-<?php
-$pitch = [];
-$categories = ['Football','Volleyball','Tennis'];
-?>
+
 @extends('admin.dashboardLayout')
 
 @section('content')
@@ -28,19 +25,22 @@ $categories = ['Football','Volleyball','Tennis'];
         </ul>
     </div>
     @endif
+    {!! Form::model($pitch ,array('route' =>['pitch.update',$pitch->id], 'method'=>'PUT')) !!}
 
-    {!! Form::model($pitch , array('route' => array('pitch.update', 1), 'method'=>'PUT')) !!}
-
-    {!! Form::label('category_id', 'Category:') !!}
-    {!! Form::select('category_id',$categories, null ,array('class'=>'form-select')) !!}
+    {!! Form::label('court_id', 'Court:') !!}
+    <select name="court_id" class="form-select">
+        @foreach ($courts as $court)
+            <option value="{{ $court->id }}">{{ $court->court_category->category_name }}</option>
+        @endforeach
+    </select>
     <br>
     {!! Form::label('pitch_num', "Pitch's number:") !!}
-    {!! Form::text('pitch_num',null, array('class'=>'form-control')) !!}
+    {!! Form::text('pitch_num',$pitch->pitch_num, array('class'=>'form-control')) !!}
     <br>
     {!! Form::label('size', 'Size:') !!}
-    {!! Form::text('size',null, array('class'=>'form-control')) !!}
+    {!! Form::text('size',$pitch->size, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
+    {!! Form::submit('Update', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('pitch.index')}}" content="Back"/>
     {!! Form::close() !!}
 </div>

@@ -6,7 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClubController;
 use App\Http\Controllers\CourtCategoryController;
-
+use App\Http\Controllers\CourtController;
+use App\Http\Controllers\PitchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,7 @@ use App\Http\Controllers\CourtCategoryController;
 |
 */
 
-Route::get(
-    '/',function(){
-        return redirect('/dashboard');
-    }
-)->middleware('auth')->name('home');
+Route::get('/',function(){ return redirect('/dashboard');})->middleware('auth')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,70 +32,15 @@ require __DIR__ . '/auth.php';
 
 // club
     Route::resource('club', ClubController::class);
-
-    // Route::get('/club',[ClubController::class,'edit'])->name('club.edit');
-    // Route::get('club/index',[ClubController::class,'index'])->name('club.index');
-    // Route::Put('club/update/{id}',[ClubController::class,'update'])->name('club.update');
-    // Route::get('club/create',[ClubController::class,'create'])->name('club.create');
-    // Route::get('club/delete',[ClubController::class,'delete'])->name('club.delete');
-    // Route::Post('club/store',[ClubController::class,'store'])->name('club.store');
-
 // court category
     Route::resource('court_category', CourtCategoryController::class);
-// Route::get('/category', function () {
-//     return view('court_category.index');
-// })->name('category.index');
-
-// Route::get('category/create', function () {
-//     return view('court_category.create');
-// })->name('category.create');
-
-// Route::get('category/update', function () {
-//     return view('court_category.edit');
-// })->name('category.update');
-
-// Route::get('category/delete', function () {
-//     return view('court_category.index');
-// })->name('category.delete');
-
 //dashboard
-Route::get('dashboard',function(){
-    return view('admin.dashboard');
-})->name('dashboard');
-
+    Route::get('dashboard',function(){return view('admin.dashboard');})->name('dashboard');
 // court 
-Route::get('/court', function () {
-    return view('court.index');
-})->name('court.index');
-
-Route::get('court/create', function () {
-    return view('court.create');
-})->name('court.create');
-
-Route::get('court/update', function () {
-    return view('court.edit');
-})->name('court.update');
-
-Route::get('court/delete', function () {
-    return view('court.index');
-})->name('court.delete');
-
+    Route::resource('court', CourtController::class);
 // pitch 
-Route::get('/pitch', function () {
-    return view('pitch.index');
-})->name('pitch.index');
+    Route::resource('pitch', PitchController::class);
 
-Route::get('pitch/create', function () {
-    return view('pitch.create');
-})->name('pitch.create');
-
-Route::get('pitch/update', function () {
-    return view('pitch.edit');
-})->name('pitch.update');
-
-Route::get('pitch/delete', function () {
-    return view('pitch.index');
-})->name('pitch.delete');
 
 // available pitch 
 Route::get('/available_pitch', function () {

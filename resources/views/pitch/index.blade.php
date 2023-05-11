@@ -27,34 +27,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href="#">Pitch 001</a></td>
-                <td><a href="#">Football</a></td>
-                <td>Small</td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('pitch.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#">Pitch 002</a></td>
-                <td><a href="#">Football</a></td>
-                <td>Small</td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('pitch.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
+            @php
+                $count = 1;
+            @endphp
+            @foreach ($pitches[0] as $pitch)
+                <tr>
+                    <td>{{$count}}</td>
+                    <td><a href="#">Pitch {{$pitch->pitch_num}}</a></td>
+                    <td><a href="#">{{$pitch->court->court_category->category_name}}</a></td>
+                    <td>{{$pitch->size}}</td>
+                    <td><a class="btn btn-primary btn-sm" href="{!!route('pitch.edit',$pitch->id)!!}">Update</a></td>
+                    <td>
+                    {!! Form::open(['route'=>['pitch.destroy',$pitch->id], 'method'=>'DELETE']) !!}
+                    {!! csrf_field() !!}
+                    {!! method_field('DELETE') !!}
+                        <button class="btn btn-danger btn-sm delete">Delete</button>
+                    {!! Form::close() !!} 
+                    </td>
+                </tr>
+                @php
+                    $count = $count + 1;
+                @endphp
+            @endforeach
         </tbody>
     </table>
     <div>

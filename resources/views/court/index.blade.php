@@ -8,6 +8,7 @@
         <x-create-icon href="{{route('court.create')}}" />
     </div>
 
+    {{-- search bar --}}
     {{ Form::open(array('url'=>'/search','method'=>'get')) }}
     <div class="input-group">
         {{ Form::text('keyword',$keyword ?? '', array('placeholder'=>'Search', 'class'=>'form-control')) }}
@@ -15,45 +16,68 @@
     </div>
     {{ Form::close() }}
 
+    {{-- table --}}
     <table class="table mt-3">
         <thead class="table-success text-success">
             <tr>
                 <th>No</th>
                 <th>Club</th>
                 <th>Category</th>
+                <th>open time</th>
+                <th>close time</th>
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td><a href="#">Blue sport</a></td>
-                <td><a href="#">Football</a></td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('court.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><a href="#">Blue sport</a></td>
-                <td><a href="#">Volleyball</a></td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('court.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
+            @if(count($courts) > 0)
+                <?php
+                    $count = 1;
+                ?>
+                @foreach ( $courts as $court )
+                    <tr>
+                        <td>{{$count}}</td>
+                        <td><a href="#">{{$court->club->name}}</a></td>
+                        <td><a href="#">{{$court->court_category->category_name}}</a></td>
+                        <td><a href="#">{{$court->open_time}}</a></td>
+                        <td><a href="#">{{$court->close_time}}</a></td>
+                        <td><a class="btn btn-primary btn-sm" href="{{ route('court.edit', ['court' =>$court->id]) }}">Update</a></td>
+                        <td>
+                        {!! Form::open(['route'=>['court.destroy',$court->id],'method'=>'DELETE']) !!}
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                            <button class="btn btn-danger btn-sm delete">Delete</button>
+                        {!! Form::close() !!} 
+                        </td>
+                    </tr>
+                    <?php $count++; ?>
+                @endforeach
+                
+            @else
+                <tr><td colspan="7" class="text-center">No Court</td></tr>
+            @endif
         </tbody>
     </table>
+
+    {{-- card --}}
+    <div class='d-flex flex-wrap'>
+        @foreach ($courts as $court )
+            <div class="card p-1 m-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{$court->court_category->category_name}}</h5>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-primary">open time</p>
+                        <p class="text-danger">close time</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="text-primary">{{$court->open_time}}</p>
+                        <p class="text-danger">{{$court->close_time}}</p>
+                    </div>
+                </div>
+            </div> 
+        @endforeach
+    </div>
+
     <div>
         <x-btn-danger content="Back" href="{{route('dashboard')}}" />
     </div>
