@@ -2,7 +2,7 @@
 $role = ['User','Admin','Super admin'];
 $user = [];
 ?>
-@extends('admin.dashboardLayout')
+@extends('super_admin.SuperDashboardLayout')
 
 @section('content')
 

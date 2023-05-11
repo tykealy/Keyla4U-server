@@ -9,6 +9,7 @@ use App\Http\Controllers\CourtCategoryController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\PitchController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,3 +103,27 @@ Route::get('/order_detail', function(){
 Route::get('order_detail/create', function(){
     return view('order_detail.create');
 })->name('order_detail.create');
+
+// ================== Super admin =======================
+
+//super admin dashboard
+Route::get('/super_admin_dashboard', function(){
+    return view('super_admin.superDashboard');
+})->name('super_admin_dashboard');
+
+//super_admin_clubs
+// Route::get('/clubs', function(){
+//     return view('clubs.index');
+// })->name('clubs.index');
+
+// Route::get('clubs/create', function(){
+//     return view('clubs.create');
+// })->name('clubs.create');
+
+// Route::get('clubs/update', function(){
+//     return view('clubs.edit');
+// })->name('clubs.update');
+
+
+Route::resource('/clubs', ClubsController::class);
+Route::get('/search',[ClubsController::class, 'getBySearch'])->name('clubs.search');
