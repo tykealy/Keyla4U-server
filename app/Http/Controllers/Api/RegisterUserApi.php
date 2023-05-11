@@ -20,7 +20,7 @@ class RegisterUserApi extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()]
         ]);
 
         $user = User::create([
@@ -28,7 +28,8 @@ class RegisterUserApi extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'account_role_id' => 2
+            'account_role_id' => 2,
+            'phone' => $request->phone
         ]);
 
         event(new Registered($user));
