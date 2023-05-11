@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('account_types', function (Blueprint $table) {
             $table->id();
             $table->string('role_name');
-            $table->integer('role_id');
+            $table->interger('role_id');
             $table->timestamps();
         });
     }

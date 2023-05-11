@@ -8,7 +8,15 @@
         <x-create-icon href="{{route('clubs.create')}}" />
     </div>
 
-    {{ Form::open(array('url'=>'/search','method'=>'get')) }}
+    
+    @if(Session::has('club_delete'))
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Primary!</strong> {!! session('club_delete') !!}
+    </div>
+    @endif
+
+    {{ Form::open(array('url'=>'/search_club','method'=>'get')) }}
     <div class="input-group">
         {{ Form::text('keyword',$keyword ?? '', array('placeholder'=>'Search', 'class'=>'form-control')) }}
         {{ Form::submit('search',array('class'=>'btn btn-primary')) }}

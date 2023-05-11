@@ -40,6 +40,7 @@ class ClubsController extends Controller
         return view('clubs.create',['users' => $users]);
     }
 
+
     /**
      * Store a newly created resource in storage.
      */
@@ -145,7 +146,7 @@ class ClubsController extends Controller
         $image_path = 'img/'.$club->image;
         File::delete($image_path);
         $club->delete();
-        Session::flash('product_delete','Data is deleted ('.$club->name.')');
+        Session::flash('club_delete','Data is deleted ('.$club->name.')');
     	return redirect('clubs');
     }
 
