@@ -1,4 +1,4 @@
-@extends('admin.dashboardLayout')
+@extends('super_admin.SuperDashboardLayout')
 
 @section('content')
 <div class="card p-3 m-3">  
@@ -64,7 +64,7 @@
         </tbody>
     </table>
     <div>
-        <x-btn-danger content="Back" href="{{route('dashboard')}}" />
+        <x-btn-danger content="Back" href="{{route('super_admin_dashboard')}}" />
     </div>
 </div>
 @endsection

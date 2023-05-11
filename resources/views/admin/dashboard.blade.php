@@ -15,7 +15,6 @@
     <div class="row gap-3 p-3">
         <x-widgets-card content="Favorite" class="bg-success" href="{{route('favorite.index')}}"/>
         <x-widgets-card content="Order" class="bg-info" href="{{route('order.index')}}"/>
-        <x-widgets-card content="User" class="bg-warning" href="{{route('user.index')}}"/>
     </div>
 
 </div>
