@@ -100,10 +100,11 @@ Route::get('/super_admin_dashboard', function(){
 
 Route::resource('/clubs', ClubsController::class);
 Route::get('/search_club',[ClubsController::class, 'getBySearch'])->name('clubs.search');
-
+Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->name('clubs.createWithUserId');
 // User
 Route::resource('/user', UserController::class);
 Route::get('/search_user',[UserController::class, 'getBySearch'])->name('user.search');
+
 // Route::get('/user', function () {
 //     return view('user.index');
 // })->name('user.index');

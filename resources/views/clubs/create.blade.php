@@ -27,7 +27,7 @@
     {!! Form::open(array('url'=>'clubs','files'=>'true')) !!}
 
     {!! Form::label('user_id', 'User:') !!}
-    {!! Form::select('user_id',$users,null,array('class'=>'form-select')) !!}
+    {!! Form::select('user_id',$users,isset($user_id) ? $user_id : null,array('class'=>'form-select')) !!}
     <br>
     {!! Form::label('club_name', "Club's Name:") !!}
     {!! Form::text('club_name',null, array('class'=>'form-control')) !!}

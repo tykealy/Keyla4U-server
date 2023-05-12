@@ -6,7 +6,7 @@
     <x-page-subtitle class="d-flex justify-content-between align-items-center">
         <span>Detail</span>
         @if($user->account_role_id == 1)
-        <x-create-icon href="{{route('clubs.create')}}" />
+        <x-create-icon href="{{url('/createWithUserId?user_id='.$user->id)}}"/>
         @endif
     </x-page-subtitle>
     <table>

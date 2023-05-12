@@ -29,6 +29,7 @@ class ClubsController extends Controller
      */
     public function create()
     {
+       
         $users = array();
         $admins = User::where('account_role_id','1')->get()->sortBy('first_name');
 
@@ -116,7 +117,6 @@ class ClubsController extends Controller
 		}
 
         $club = Club::find($id);
-		// Create The Post
         
 		if($request->file('image') != ""){
             $image = $request->file('image');
@@ -128,9 +128,11 @@ class ClubsController extends Controller
 		$club->name = $request->club_name;
 		$club->map = $request->map;
         $club->user_id = $request->user_id;
+
 		if(isset($filename)){
 		    $club->image = $filename;
 		}
+
 		$club->save();
 
 		Session::flash('clubs_update','Data is updated ('.$club->name.')');
@@ -165,6 +167,20 @@ class ClubsController extends Controller
 
         }
     }
+
+    public function createWithUserId(Request $request){
+        
+        $users = array();
+        $admins = User::where('account_role_id','1')->get()->sortBy('first_name');
+
+        foreach($admins as $user){
+
+            $users[$user->id] = $user->first_name . ' ' . $user->last_name;
+        }
+
+        return view('clubs.create')->with('users', $users)->with('user_id', $request->user_id);
+    }
+
 }
 
 
