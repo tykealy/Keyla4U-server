@@ -80,7 +80,6 @@ Route::get('user/delete', function () {
 })->name('user.delete');
 
 //favorite
-
 Route::get('/favorite', function(){
     return view('favorite.index');
 })->name('favorite.index');
