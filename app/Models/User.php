@@ -55,7 +55,7 @@ class User extends Authenticatable
     }
 
     public function account_type(){
-        return $this->belongsTo(AccountType::class);
+        return $this->belongsTo(Account_types::class);
     }
 
     public function court(){
