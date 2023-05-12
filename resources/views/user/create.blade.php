@@ -1,6 +1,4 @@
-<?php
-$role = ['User','Admin','Super admin'];
-?>
+
 @extends('super_admin.SuperDashboardLayout')
 
 @section('content')
@@ -8,10 +6,10 @@ $role = ['User','Admin','Super admin'];
 <div class="card p-3 m-3">
     <x-page-subtitle>Create</x-page-subtitle>
 
-    @if(Session::has('court_create'))
+    @if(Session::has('user_create'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Primary!</strong> {!! session('court_create') !!}
+        <strong>Primary!</strong> {!! session('user_create') !!}
     </div>
     @endif
     @if (count($errors) > 0)
@@ -38,11 +36,15 @@ $role = ['User','Admin','Super admin'];
     {!! Form::label('email', "Email:") !!}
     {!! Form::email('email',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('phone_number', "Phone Number:") !!}
-    {!! Form::text('phone_number',null, array('class'=>'form-control')) !!}
+    {!! Form::label('phone', "Phone Number:") !!}
+    {!! Form::text('phone',null, array('class'=>'form-control')) !!}
     <br>
-    {!! Form::label('role', 'Role:') !!}
-    {!! Form::select('role',$role,null, array('class'=>'form-select')) !!}
+    {!! Form::label('account_role_id', 'Role:') !!}
+    {!! Form::select('account_role_id',$user_types,null, array('class'=>'form-select')) !!}
+    <br>
+    {!! Form::label('password', 'Password:') !!}
+    {!! Form::text('password',null, array('class'=>'form-control')) !!}
+    <br>
     <br>
     {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('user.index')}}" content="Back"/>

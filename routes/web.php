@@ -9,7 +9,7 @@ use App\Http\Controllers\CourtCategoryController;
 use App\Http\Controllers\CourtController;
 use App\Http\Controllers\PitchController;
 use App\Http\Controllers\ClubsController;
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,22 +62,6 @@ Route::get('available_pitch/delete', function () {
 })->name('available_pitch.delete');
 
 
-// User
-Route::get('/user', function () {
-    return view('user.index');
-})->name('user.index');
-
-Route::get('user/create', function () {
-    return view('user.create');
-})->name('user.create');
-
-Route::get('user/update', function () {
-    return view('user.edit');
-})->name('user.update');
-
-Route::get('user/delete', function () {
-    return view('user.index');
-})->name('user.delete');
 
 //favorite
 
@@ -113,18 +97,25 @@ Route::get('/super_admin_dashboard', function(){
 })->name('super_admin_dashboard');
 
 //super_admin_clubs
-// Route::get('/clubs', function(){
-//     return view('clubs.index');
-// })->name('clubs.index');
-
-// Route::get('clubs/create', function(){
-//     return view('clubs.create');
-// })->name('clubs.create');
-
-// Route::get('clubs/update', function(){
-//     return view('clubs.edit');
-// })->name('clubs.update');
-
 
 Route::resource('/clubs', ClubsController::class);
-Route::get('/search',[ClubsController::class, 'getBySearch'])->name('clubs.search');
+Route::get('/search_club',[ClubsController::class, 'getBySearch'])->name('clubs.search');
+
+// User
+Route::resource('/user', UserController::class);
+Route::get('/search_user',[UserController::class, 'getBySearch'])->name('user.search');
+// Route::get('/user', function () {
+//     return view('user.index');
+// })->name('user.index');
+
+// Route::get('user/create', function () {
+//     return view('user.create');
+// })->name('user.create');
+
+// Route::get('user/update', function () {
+//     return view('user.edit');
+// })->name('user.update');
+
+// Route::get('user/delete', function () {
+//     return view('user.index');
+// })->name('user.delete');
