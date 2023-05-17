@@ -15,10 +15,6 @@ class Pitch extends Model
         return $this->belongsTo(Court::class);
     }
 
-    public function reservation() {
-        return $this->belongsTo(Reservetion::class);
-    }
-
     public function pitch_avalible_time(){
         return $this->hasMany(pitch_avalible_time::class);
     }

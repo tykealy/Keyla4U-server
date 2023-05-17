@@ -3,11 +3,6 @@
 @section('content')
 <div class="card p-3 m-3">  
    
-    <div class= "d-flex align-items-center justify-content-between mb-4">
-        <x-page-title title="Order" />
-        <x-create-icon href="{{route('order.create')}}" />
-    </div>
-
     {{ Form::open(array('url'=>'/search','method'=>'get')) }}
     <div class="input-group">
         {{ Form::text('keyword',$keyword ?? '', array('placeholder'=>'Search', 'class'=>'form-control')) }}
@@ -30,33 +25,36 @@
                 <th>Play date</th>
                 <th>Start time</th>
                 <th>End time</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th>Payment-method</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Piseth</td>
-                <td>085 67 567</td>
-                <td>Football</td>
-                <td>001</td>
-                <td>10 $</td>
-                <td>total amount...</td>
-                <td>active</td>
-                <td>2021-09-09</td>
-                <td>2021-09-09</td>
-                <td>06:00 PM</td>
-                <td>08:00 PM</td>
-                <td><a class="btn btn-primary btn-sm" href="{{route('order.update')}}">Update</a></td>
-                <td>
-                {!! Form::open(array('url'=>'category/'. 1, 'method'=>'DELETE')) !!}
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-                    <button class="btn btn-danger btn-sm delete">Delete</button>
-                {!! Form::close() !!} 
-                </td>
-            </tr>
+            @if(isset($orders))
+                @php
+                    $count = 1;
+                @endphp
+                @foreach ($orders as $order )
+                    <tr>
+                        <td>{{$count}}</td>
+                        <td>{{$order->customer_name}}</td>
+                        <td>{{$order->customer_phone}}</td>
+                        <td>{{$order->pitch->court->court_category->category_name}}</td>
+                        <td>{{$order->pitch->pitch_num}}</td>
+                        <td>{{$order->unit_price}}$</td>
+                        <td>{{$order->total_amount}}$</td>
+                        <td>{{$order->order_status}}</td>
+                        <td>{{$order->booked_date}}</td>
+                        <td>{{$order->play_date}}</td>
+                        <td>{{$order->start_time}}</td>
+                        <td>{{$order->end_time}}</td>
+                        <td>{{$order->payment_method}}</td>
+                    </tr>
+                    @php
+                        $count = $count + 1;
+                    @endphp
+                @endforeach
+                
+            @endif
         </tbody>
     </table>
     <div>

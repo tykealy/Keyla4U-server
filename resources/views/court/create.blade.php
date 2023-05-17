@@ -33,6 +33,9 @@ $court = [];
     {!! Form::label('category_id', 'Category:') !!}
     {!! Form::select('category_id', $categories->pluck('category_name', 'id'), null, ['class' => 'form-select']) !!}
     <br>
+    {!! Form::label('unit_price', "Unit price:") !!}
+    {!! Form::text('unit_price',null, array('class'=>'form-control')) !!}
+    <br>
     {!! Form::label('open_time', "Start Time:") !!}
     {!! Form::time('open_time',null, array('class'=>'form-control')) !!}
     <br>

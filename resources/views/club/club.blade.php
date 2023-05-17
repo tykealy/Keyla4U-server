@@ -30,6 +30,10 @@
             <br>
             {!! Form::text('name', isset($club) ? $club->name : null, array('class'=>'form-control','placeholder'=>"Sport center's name")) !!}
             <br>
+            {!! Form::text('location', isset($club) ? $club->location : null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
+            <br>
+            {!! Form::text('description', isset($club) ? $club->description : null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
+            <br>
             {!! Form::label('image', 'Image:') !!}
             <br>
             {!! Form::file('image', array('class'=>'form-control')) !!}
@@ -91,6 +95,11 @@
             {!! Form::label('name', 'Name:') !!}
             <br>
             {!! Form::text('name',null, array('class'=>'form-control','placeholder'=>"Sport center's name")) !!}
+            <br>
+            {!! Form::text('location', isset($club) ? $club->location : null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
+            <br>
+            {!! Form::text('description', isset($club) ? $club->description : null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
+            <br>
             <br>
             {!! Form::label('image', 'Image:') !!}
             <br>
