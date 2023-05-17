@@ -11,7 +11,7 @@ class Account_types extends Model
     use HasFactory;
 
     protected $guarded = [''];
-
+    protected $table = 'account_types';
     public function user(){
         return $this->hasMany(User::class);
     }
