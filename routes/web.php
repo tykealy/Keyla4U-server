@@ -12,6 +12,7 @@ use App\Http\Controllers\ClubsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\availableTimeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,19 +86,7 @@ Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->na
 Route::resource('/user', UserController::class);
 Route::get('/search_user',[UserController::class, 'getBySearch'])->name('user.search');
 
-// Route::get('/user', function () {
-//     return view('user.index');
-// })->name('user.index');
-
-// Route::get('user/create', function () {
-//     return view('user.create');
-// })->name('user.create');
-
-// Route::get('user/update', function () {
-//     return view('user.edit');
-// })->name('user.update');
-
-// Route::get('user/delete', function () {
-//     return view('user.index');
-// })->name('user.delete');
+//register 
+Route::get('/admin_register',[AdminRegisterController::class,'index'])->name('admin_register');
+Route::post('/admin_register',[AdminRegisterController::class,'store'])->name('admin_register');
 
