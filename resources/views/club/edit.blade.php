@@ -41,7 +41,7 @@ $club = [];
     {!! Form::text('map',null, array('class'=>'form-control','placeholder'=>"Map's Link")) !!}
     <br>
     {!! Form::submit('Update', array('class'=>'btn btn-primary btn-sm')) !!}
-    <x-btn-danger href="{{route('club.index')}}" content="Back"/>
+    <x-btn-danger href="{{route('dashboard')}}" content="Back"/>
     {!! Form::close() !!}
 
 </div>

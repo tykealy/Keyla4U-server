@@ -9,8 +9,9 @@ use App\Models\Court_category;
 use App\Models\Court;
 Use App\Models\Club;
 use File;
+use Session;
 use Validator;
-
+use Carbon\Carbon;
 class CourtController extends Controller
 {
     /**
@@ -38,7 +39,8 @@ class CourtController extends Controller
      */
     public function store(Request $request)
     {
-        //
+  
+
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:court_categories,id',
             'open_time' => 'required|date_format:H:i',
@@ -61,8 +63,10 @@ class CourtController extends Controller
         $record->club_id = $club['id'];
         $record->save();
 
-        return back();
 
+        Session::flash('court_create', 'Successfully created court!');
+
+        return redirect('court/create');
     }
 
     /**
@@ -89,22 +93,32 @@ class CourtController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {   
+        
+        $open_time = Carbon::createFromFormat('H:i:s', $request->open_time)->format('H:i'); 
+        $close_time = Carbon::createFromFormat('H:i:s', $request->close_time)->format('H:i');
+
+        $request->merge([
+            'open_time' => $open_time,
+            'close_time' => $close_time,
+        ]);
+
+
         $validator = Validator::make($request->all(), [
             'category_id' => 'sometimes|exists:court_categories,id',
             'open_time' => 'sometimes|date_format:H:i',
-            'close_time' => 'sometimes|date_format:H:i|after:start_time',
+            'close_time' => 'sometimes|date_format:H:i',
             'unit_price' => 'sometimes|numeric'
         ]);
-    
+
         if ($validator->fails()) {
             return back()
                 ->withInput()
                 ->withErrors($validator);
         }
-         
+
         $record = Court::find($id);
+       
         if ($request->has('category_id')) {
             $record->court_category_id = $request->input('category_id');
         }
@@ -112,20 +126,21 @@ class CourtController extends Controller
 	    if ($request->has('open_time')) {
             $record->open_time = $request->input('open_time');
         }
-    
+  
         if ($request->has('close_time')) {
             $record->close_time = $request->input('close_time');
         }
 
         if ($request->has('unit_price')) {
-            $record->close_time = $request->input('unit_price');
+            $record->unit_price = $request->input('unit_price');
         }
         
         $club = Club::where('user_id', '=',Auth::id())->first();
         $record->club_id = $club['id'];
         $record->save();
 
-        return back();
+        Session::flash('court_update', 'Successfully updated court!');
+        return redirect('court/'.$record->id.'/edit');
 
     }
 

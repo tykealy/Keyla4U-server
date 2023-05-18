@@ -115,7 +115,7 @@
             <br>
             
             {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
-            <x-btn-danger href="{{route('club.index')}}" content="Back"/>
+            <x-btn-danger href="{{route('dashboard')}}" content="Back"/>
             {!! Form::close() !!}
             
             <script>

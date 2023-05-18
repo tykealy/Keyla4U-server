@@ -7,7 +7,7 @@
 
     <x-page-subtitle>Create</x-page-subtitle>
 
-    @if(Session::has('ptich_create'))
+    @if(Session::has('pitch_create'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>Primary!</strong> {!! session('pitch_create') !!}
