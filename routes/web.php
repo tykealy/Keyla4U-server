@@ -10,6 +10,9 @@ use App\Http\Controllers\CourtController;
 use App\Http\Controllers\PitchController;
 use App\Http\Controllers\ClubsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\availableTimeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,51 +46,30 @@ require __DIR__ . '/auth.php';
 // pitch 
     Route::resource('pitch', PitchController::class);
 
-
-// available pitch 
-Route::get('/available_pitch', function () {
-    return view('available_pitch.index');
-})->name('available_pitch.index');
-
-Route::get('available_pitch/create', function () {
-    return view('available_pitch.create');
-})->name('available_pitch.create');
-
-Route::get('available_pitch/update', function () {
-    return view('available_pitch.edit');
-})->name('available_pitch.update');
-
-Route::get('available_pitch/delete', function () {
-    return view('available_pitch.index');
-})->name('available_pitch.delete');
-
-
+// pitch available time 
+    Route::get('pitch_available_time', [availableTimeController::class, 'index'])->name('available_time.index');
+    Route::Post('getPitch', [availableTimeController::class, 'getPitch'])->name('available_time.getPitch');
+    Route::Post('getDate', [availableTimeController::class, 'getDate'])->name('available_time.getDate');
+    Route::Post('getAvailableTime', [availableTimeController::class, 'getAvailableTime'])->name('available_time.getAvailableTime');
 
 //favorite
-
-Route::get('/favorite', function(){
-    return view('favorite.index');
-})->name('favorite.index');
+    Route::get('/favorite', function(){
+        return view('favorite.index');
+    })->name('favorite.index');
 
 //order
-Route::get('/order', function(){
-    return view('order.index');
-})->name('order.index');
-Route::get('order/create', function () {
-    return view('order.create');
-})->name('order.create');
-Route::get('order/update', function () {
-    return view('order.edit');
-})->name('order.update');
+    Route::get('/order',[OrderController::class,'index'])->name('order.index');
 
 //order detail
-
 Route::get('/order_detail', function(){
     return view('order_detail.index');
 })->name('order_detail.index');
 Route::get('order_detail/create', function(){
     return view('order_detail.create');
 })->name('order_detail.create');
+
+
+
 
 // ================== Super admin =======================
 
@@ -97,7 +79,6 @@ Route::get('/super_admin_dashboard', function(){
 })->name('super_admin_dashboard');
 
 //super_admin_clubs
-
 Route::resource('/clubs', ClubsController::class);
 Route::get('/search_club',[ClubsController::class, 'getBySearch'])->name('clubs.search');
 Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->name('clubs.createWithUserId');
@@ -105,18 +86,7 @@ Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->na
 Route::resource('/user', UserController::class);
 Route::get('/search_user',[UserController::class, 'getBySearch'])->name('user.search');
 
-// Route::get('/user', function () {
-//     return view('user.index');
-// })->name('user.index');
+//register 
+Route::get('/admin_register',[AdminRegisterController::class,'index'])->name('admin_register');
+Route::post('/admin_register',[AdminRegisterController::class,'store'])->name('admin_register');
 
-// Route::get('user/create', function () {
-//     return view('user.create');
-// })->name('user.create');
-
-// Route::get('user/update', function () {
-//     return view('user.edit');
-// })->name('user.update');
-
-// Route::get('user/delete', function () {
-//     return view('user.index');
-// })->name('user.delete');

@@ -42,7 +42,8 @@ class CourtController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:court_categories,id',
             'open_time' => 'required|date_format:H:i',
-            'close_time' => 'required|date_format:H:i|after:start_time'
+            'close_time' => 'required|date_format:H:i|after:start_time',
+            'unit_price' => 'required|numeric'
         ]);
     
         if ($validator->fails()) {
@@ -55,6 +56,7 @@ class CourtController extends Controller
         $record->court_category_id = $request->category_id;
         $record->open_time = $request->open_time;
         $record->close_time = $request->close_time;
+        $record->unit_price = $request->unit_price;
         $club = Club::where('user_id', '=',Auth::id())->first();
         $record->club_id = $club['id'];
         $record->save();
@@ -92,7 +94,8 @@ class CourtController extends Controller
         $validator = Validator::make($request->all(), [
             'category_id' => 'sometimes|exists:court_categories,id',
             'open_time' => 'sometimes|date_format:H:i',
-            'close_time' => 'sometimes|date_format:H:i|after:start_time'
+            'close_time' => 'sometimes|date_format:H:i|after:start_time',
+            'unit_price' => 'sometimes|numeric'
         ]);
     
         if ($validator->fails()) {
@@ -112,6 +115,10 @@ class CourtController extends Controller
     
         if ($request->has('close_time')) {
             $record->close_time = $request->input('close_time');
+        }
+
+        if ($request->has('unit_price')) {
+            $record->close_time = $request->input('unit_price');
         }
         
         $club = Club::where('user_id', '=',Auth::id())->first();

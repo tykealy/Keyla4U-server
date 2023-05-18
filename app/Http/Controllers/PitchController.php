@@ -9,8 +9,10 @@ use App\Models\Court_category;
 use App\Models\Pitch;
 use App\Models\Court;
 Use App\Models\Club;
+Use App\Models\Pitch_avalible_time;
 use File;
 use Validator;
+use Carbon\Carbon;
 
 class PitchController extends Controller
 {
@@ -61,6 +63,31 @@ class PitchController extends Controller
         $record->pitch_num = $request->pitch_num;
         $record->size = $request->size;
         $record->save();
+
+        
+        // retrieve court open and close time
+        $court = Court::find($request->court_id);
+        $openTime = Carbon::parse($court->open_time);
+        $closeTime = Carbon::parse($court->close_time);
+
+        // create available time for pitch record each day of the week starting from today
+        for ($i = 0; $i < 7; $i++) {
+            $date = Carbon::now()->addDays($i);
+            //$dayOfWeek = $date->dayOfWeek;
+            $dayOfWeek = $date;
+            for ($time = $openTime->copy(); $time->lessThan($closeTime); $time->addHour()) {
+                // create available time slot for this day and time
+                $availableTime = new Pitch_avalible_time();
+                $availableTime->pitch_id = $record->id;
+                $availableTime->week_day = $dayOfWeek;
+                $availableTime->availability = true;
+                $availableTime->start_time = $time->format('H:i:s');
+                $availableTime->end_time = $time->copy()->addHour()->format('H:i:s');
+                $availableTime->save();
+            }
+        }
+
+        
         return back();
     }
 
@@ -121,6 +148,11 @@ class PitchController extends Controller
     public function destroy(string $id)
     {
         $pitch= Pitch::find($id);
+
+        $time = Pitch_avalible_time::where('pitch_id', $pitch->id);
+                    
+        $time->delete();
+
         $pitch->delete();
         return back();
     }

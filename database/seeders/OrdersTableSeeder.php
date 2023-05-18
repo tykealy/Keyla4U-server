@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Pitch;
-
+use App\Models\Court;
 class OrdersTableSeeder extends Seeder
 {
     /**
@@ -36,8 +36,7 @@ class OrdersTableSeeder extends Seeder
                 'end_time' => $pitch->pitch_avalible_time()->first()->end_time,
                 'customer_name' => $user->last_name,
                 'customer_phone' => $user->phone,
-                'unit_price'=> $pitch->pitch_avalible_time()->first()->unit_price,
-                'payment_method' => 'abaPayway',
+                'unit_price'=> 12.12,
             ]);
         }
     }

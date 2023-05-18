@@ -30,6 +30,9 @@
     {!! Form::label('category_id', 'Category:') !!}
     {!! Form::select('category_id', $categories->pluck('category_name', 'id'), $court->court_category->id, ['class' => 'form-select']) !!}
     <br>
+    {!! Form::label('unit_price', "Unit price:") !!}
+    {!! Form::text('unit_price',$court->unit_price, array('class'=>'form-control')) !!}
+    <br>
     {!! Form::label('open_time', "open Time:") !!}
     {!! Form::time('open_time',$court->open_time, array('class'=>'form-control')) !!}
     <br>

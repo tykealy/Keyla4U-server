@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('pitch_avalible_times', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pitch_id');
-            $table->decimal('unit_price',5,2);
             $table->date('week_day');
             $table->time('start_time');
             $table->time('end_time');
+            $table->boolean('availability');
             $table->timestamps();
         });
     }

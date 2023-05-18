@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('club_id');
             $table->time('open_time');
             $table->time('close_time');
+            $table->decimal('unit_price',5,2);
             $table->timestamps();
         });
     }
