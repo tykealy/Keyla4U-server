@@ -6,10 +6,10 @@
 <div class="card p-3 m-3">
     <x-page-subtitle>Update category</x-page-subtitle>
 
-    @if(Session::has('club_update'))
+    @if(Session::has('category_update'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Primary!</strong> {!! session('club_update') !!}
+        <strong>Primary!</strong> {!! session('category_update') !!}
     </div>
     @endif
     @if (count($errors) > 0)
@@ -30,7 +30,7 @@
     <br>
     {!! Form::text('category_name',$category['category_name'], array('class'=>'form-control','placeholder'=>"Category's name")) !!}
     <br>
-    {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
+    {!! Form::submit('Update', array('class'=>'btn btn-primary btn-sm')) !!}
     <x-btn-danger href="{{route('court_category.index')}}" content="Back"/>
     {!! Form::close() !!}
 </div>

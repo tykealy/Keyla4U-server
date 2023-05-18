@@ -17,49 +17,51 @@
     {{ Form::close() }}
 
     {{-- table --}}
-    <table class="table mt-3">
-        <thead class="table-success text-success">
-            <tr>
-                <th>No</th>
-                <th>Club</th>
-                <th>Category</th>
-                <th>Unit Price</th>
-                <th>open time</th>
-                <th>close time</th>
-                <th>Update</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if(count($courts) > 0)
-                <?php
-                    $count = 1;
-                ?>
-                @foreach ( $courts as $court )
-                    <tr>
-                        <td>{{$count}}</td>
-                        <td>{{$court->club->name}}</td>
-                        <td>{{$court->court_category->category_name}}</td>
-                        <td>{{$court->unit_price}} $</td>
-                        <td>{{$court->open_time}}</td>
-                        <td>{{$court->close_time}}</td>
-                        <td><a class="btn btn-primary btn-sm" href="{{ route('court.edit', ['court' =>$court->id]) }}">Update</a></td>
-                        <td>
-                        {!! Form::open(['route'=>['court.destroy',$court->id],'method'=>'DELETE']) !!}
-                        {!! csrf_field() !!}
-                        {!! method_field('DELETE') !!}
-                            <button class="btn btn-danger btn-sm delete">Delete</button>
-                        {!! Form::close() !!} 
-                        </td>
-                    </tr>
-                    <?php $count++; ?>
-                @endforeach
-                
-            @else
-                <tr><td colspan="7" class="text-center">No Court</td></tr>
-            @endif
-        </tbody>
-    </table>
+    <div class="overflow-auto">
+        <table class="table mt-3">
+            <thead class="table-success text-success">
+                <tr>
+                    <th>No</th>
+                    <th>Club</th>
+                    <th>Category</th>
+                    <th>Unit Price</th>
+                    <th>open time</th>
+                    <th>close time</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(count($courts) > 0)
+                    <?php
+                        $count = 1;
+                    ?>
+                    @foreach ( $courts as $court )
+                        <tr>
+                            <td>{{$count}}</td>
+                            <td>{{$court->club->name}}</td>
+                            <td>{{$court->court_category->category_name}}</td>
+                            <td>{{$court->unit_price}} $</td>
+                            <td>{{$court->open_time}}</td>
+                            <td>{{$court->close_time}}</td>
+                            <td><a class="btn btn-primary btn-sm" href="{{ route('court.edit', ['court' =>$court->id]) }}">Update</a></td>
+                            <td>
+                            {!! Form::open(['route'=>['court.destroy',$court->id],'method'=>'DELETE']) !!}
+                            {!! csrf_field() !!}
+                            {!! method_field('DELETE') !!}
+                                <button class="btn btn-danger btn-sm delete">Delete</button>
+                            {!! Form::close() !!} 
+                            </td>
+                        </tr>
+                        <?php $count++; ?>
+                    @endforeach
+                    
+                @else
+                    <tr><td colspan="7" class="text-center">No Court</td></tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
 
     {{-- card --}}
     <div class='d-flex flex-wrap'>

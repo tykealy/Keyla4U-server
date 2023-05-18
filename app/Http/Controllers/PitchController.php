@@ -13,7 +13,7 @@ Use App\Models\Pitch_avalible_time;
 use File;
 use Validator;
 use Carbon\Carbon;
-
+use Session;
 class PitchController extends Controller
 {
     /**
@@ -87,8 +87,8 @@ class PitchController extends Controller
             }
         }
 
-        
-        return back();
+        Session::flash('pitch_create', 'Successfully created pitch!');
+        return redirect('pitch/create');
     }
 
     /**
@@ -139,7 +139,9 @@ class PitchController extends Controller
         }
         
         $record->save();
-        return back();
+
+        Session::flash('pitch_update', 'Successfully updated pitch!');
+        return redirect('pitch/'.$record->id.'/edit');
     }
 
     /**

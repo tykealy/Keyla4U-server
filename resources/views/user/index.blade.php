@@ -33,6 +33,7 @@
 
     @else   
 
+   <div class="overflow-auto mb-3">
     <table class="table mt-3">
         <thead class="table-success text-success">
             <tr>
@@ -75,6 +76,7 @@
 
         </tbody>
     </table>
+   </div>
 
     @endif
     <div>

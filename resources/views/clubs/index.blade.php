@@ -34,7 +34,8 @@
 
     @else   
 
-    <table class="table mt-3">
+   <div class="overflow-auto mb-3">
+   <table class="table mt-3">
         <thead class="table-success text-success">
             <tr>
                 <th>No</th>
@@ -71,6 +72,7 @@
            
         </tbody>
     </table>
+   </div>
     @endif
     <div>
         <x-btn-danger content="Back" href="{{route('super_admin_dashboard')}}" />
