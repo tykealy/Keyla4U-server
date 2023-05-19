@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LoginMail;
-
+use Illuminate\Support\Facades\Redirect;
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -36,11 +36,17 @@ class AuthenticatedSessionController extends Controller
             //sending mail to admin
             $userEmail = Auth::User()->email;
             Mail::to($userEmail)->send(new LoginMail());
-
-            $request->session()->regenerate();
-            return redirect()->intended(RouteServiceProvider::HOME);     
+            
+            if(Gate::allows('admin',Auth::user())){
+                $request->session()->regenerate();
+                return redirect()->intended(RouteServiceProvider::HOME); 
+            }else{
+                $request->session()->regenerate();
+                return redirect::route('super_admin_dashboard');
+            }
+                
         }
-    }
+    }   
     
     /**
      * Destroy an authenticated session.

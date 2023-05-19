@@ -25,7 +25,7 @@ use App\Http\Controllers\AdminRegisterController;
 |
 */
 
-Route::get('/',function(){ return redirect('/dashboard');})->middleware('auth')->name('home');
+Route::get('/',function(){ return redirect('/dashboard');})->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,57 +36,42 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 // club
-    Route::resource('club', ClubController::class);
+    Route::resource('club', ClubController::class)->middleware('admin');
 // court category
-    Route::resource('court_category', CourtCategoryController::class);
+    Route::resource('court_category', CourtCategoryController::class)->middleware('admin');
 //dashboard
-    Route::get('dashboard',function(){return view('admin.dashboard');})->name('dashboard');
+    Route::get('dashboard',function(){return view('admin.dashboard');})->middleware('admin')->name('dashboard');
 // court 
-    Route::resource('court', CourtController::class);
+    Route::resource('court', CourtController::class)->middleware('admin');
 // pitch 
-    Route::resource('pitch', PitchController::class);
+    Route::resource('pitch', PitchController::class)->middleware('admin');
 
 // pitch available time 
-    Route::get('pitch_available_time', [availableTimeController::class, 'index'])->name('available_time.index');
-    Route::Post('getPitch', [availableTimeController::class, 'getPitch'])->name('available_time.getPitch');
-    Route::Post('getDate', [availableTimeController::class, 'getDate'])->name('available_time.getDate');
-    Route::Post('getAvailableTime', [availableTimeController::class, 'getAvailableTime'])->name('available_time.getAvailableTime');
-
+    Route::get('pitch_available_time', [availableTimeController::class, 'index'])->middleware('admin')->name('available_time.index');
+    Route::Post('getPitch', [availableTimeController::class, 'getPitch'])->middleware('admin')->name('available_time.getPitch');
+    Route::Post('getDate', [availableTimeController::class, 'getDate'])->middleware('admin')->name('available_time.getDate');
+    Route::Post('getAvailableTime', [availableTimeController::class, 'getAvailableTime'])->middleware('admin')->name('available_time.getAvailableTime');
 //favorite
-    Route::get('/favorite', function(){
-        return view('favorite.index');
-    })->name('favorite.index');
-
+    Route::get('/favorite', function(){return view('favorite.index');})->middleware('admin')->name('favorite.index');
 //order
-    Route::get('/order',[OrderController::class,'index'])->name('order.index');
-
-//order detail
-Route::get('/order_detail', function(){
-    return view('order_detail.index');
-})->name('order_detail.index');
-Route::get('order_detail/create', function(){
-    return view('order_detail.create');
-})->name('order_detail.create');
-
-
+    Route::get('/order',[OrderController::class,'index'])->middleware('admin')->name('order.index');
 
 
 // ================== Super admin =======================
 
 //super admin dashboard
-Route::get('/super_admin_dashboard', function(){
-    return view('super_admin.superDashboard');
-})->name('super_admin_dashboard');
+// Define the SuperDashboard route
+Route::get('/super_admin_dashboard',function(){return view('super_admin.superDashboard');})->middleware('superAdmin')->name('super_admin_dashboard');;
 
 //super_admin_clubs
-Route::resource('/clubs', ClubsController::class);
-Route::get('/search_club',[ClubsController::class, 'getBySearch'])->name('clubs.search');
-Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->name('clubs.createWithUserId');
+Route::resource('/clubs', ClubsController::class)->middleware('superAdmin');
+Route::get('/search_club',[ClubsController::class, 'getBySearch'])->middleware('superAdmin')->name('clubs.search');
+Route::get('/createWithUserId',[ClubsController::class, 'createWithUserId'])->middleware('superAdmin')->name('clubs.createWithUserId');
 // User
 Route::resource('/user', UserController::class);
-Route::get('/search_user',[UserController::class, 'getBySearch'])->name('user.search');
+Route::get('/search_user',[UserController::class, 'getBySearch'])->middleware('superAdmin')->name('user.search');
 
 //register 
-Route::get('/admin_register',[AdminRegisterController::class,'index'])->name('admin_register');
-Route::post('/admin_register',[AdminRegisterController::class,'store'])->name('admin_register');
+Route::get('/admin_register',[AdminRegisterController::class,'index'])->middleware('superAdmin')->name('admin_register');
+Route::post('/admin_register',[AdminRegisterController::class,'store'])->middleware('superAdmin')->name('admin_register');
 
