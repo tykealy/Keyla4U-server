@@ -27,10 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $user_types = array();
-        foreach(Account_types::all() as $user_type){
-            $user_types[$user_type->role_id] = $user_type->role_name;
-        }
+        $user_types =[1 => 'Admin', 0 => 'SuperAmin'];
         return view('user.create')->with('user_types',$user_types);
     }
 
