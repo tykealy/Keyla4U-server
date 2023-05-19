@@ -13,7 +13,7 @@ class ClubApi extends Controller
         // $clubs = Club::select('id', 'name', 'map', 'image')->get();
 
         $clubs = Club::join('users', 'clubs.user_id', '=', 'users.id')
-            ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone')
+            ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone', 'clubs.description', 'clubs.location')
             ->get();
         return response()->json($clubs);
     }
