@@ -23,16 +23,16 @@
         </ul>
     </div>
     @endif
-
         @if(isset($club))
+            {{-- update club --}}
             {!! Form::open(['route' => ['club.update', auth()->user()->id], 'method' => 'Post', 'files' => true]) !!}
             {!! Form::label('name', 'Club Name:') !!}
             <br>
             {!! Form::text('name', isset($club) ? $club->name : null, array('class'=>'form-control','placeholder'=>"Sport center's name")) !!}
             <br>
-            {!! Form::text('location', isset($club) ? $club->location : null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
+            {!! Form::text('location',isset($club) ? $club->location : null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
             <br>
-            {!! Form::text('description', isset($club) ? $club->description : null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
+            {!! Form::text('description',isset($club) ? $club->description: null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
             <br>
             {!! Form::label('image', 'Image:') !!}
             <br>
@@ -90,16 +90,16 @@
                     }
                 });
             </script>
+        {{-- create club --}}
         @else
             {!! Form::open(['route' => 'club.store', 'method' => 'POST', 'files' => true]) !!}           
             {!! Form::label('name', 'Name:') !!}
             <br>
             {!! Form::text('name',null, array('class'=>'form-control','placeholder'=>"Sport center's name")) !!}
             <br>
-            {!! Form::text('location', isset($club) ? $club->location : null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
+            {!! Form::text('location',null, array('class'=>'form-control','placeholder'=>"Sport center's location")) !!}
             <br>
-            {!! Form::text('description', isset($club) ? $club->description : null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
-            <br>
+            {!! Form::text('description', null, array('class'=>'form-control','placeholder'=>"Sport center's description")) !!}
             <br>
             {!! Form::label('image', 'Image:') !!}
             <br>
@@ -119,8 +119,8 @@
             {!! Form::close() !!}
             
             <script>
-                // Image preview
-                function readURL(input) {
+                 // Image preview
+                 function readURL(input) {
                     if (input.files && input.files[0]) {
                         var reader = new FileReader();
                         reader.onload = function(e) {
@@ -138,7 +138,6 @@
                     $('#map-preview').attr('src', $(this).val());
                 });
             </script>
-        
     @endif
         
 </div>
