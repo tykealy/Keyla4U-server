@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginApi;
 use App\Http\Controllers\Api\RegisterUserApi;
 use App\Http\Controllers\Api\ClubApi;
+use App\Http\Controllers\Api\LocationApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,7 @@ Route::post('/login', [LoginApi::class, 'store']);
 
 Route::get('/clubs', [ClubApi::class, 'index']);
 Route::get('/clubs/{id}', [ClubApi::class, 'show']);
+
+Route::get('/locations', [LocationApi::class, 'index']);
+
+Route::get("/sports", [App\Http\Controllers\Api\SportApi::class, 'index']);
