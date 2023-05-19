@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use App\Models\Club;
 use File;
+use Session;
 use Illuminate\Support\Facades\Validator;
 
 class ClubController extends Controller
@@ -68,6 +69,7 @@ class ClubController extends Controller
         $record->user_id = Auth::id();
         $record->save();
 
+        Session::flash('club_create', 'Club successfully created!');
 
         return back();
     }
@@ -135,7 +137,7 @@ class ClubController extends Controller
         $club->user_id = Auth::id();
         $club->save();
 
-
+        Session::flash('club_create', 'Club successfully updated!');
         return back();
     }
 

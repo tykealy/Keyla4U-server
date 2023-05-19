@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Court_category;
-
+use Session;
 use File;
 use Illuminate\Support\Facades\Validator;
 
@@ -50,7 +50,9 @@ class CourtCategoryController extends Controller
         $record->category_name = $request->category_name;
         $record->user_id = Auth::id();
         $record->save();
-        return redirect()->route('court_category.index');
+
+        Session::flash('category_create', 'Successfully created category!');
+        return redirect('court_category/create');
     }
 
     /**
@@ -77,7 +79,7 @@ class CourtCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|max:50|min:3',
         ]);
@@ -93,7 +95,8 @@ class CourtCategoryController extends Controller
         $record->category_name = $request->category_name;
         $record->user_id = Auth::id();
         $record->save();
-        return redirect()->route('court_category.index');
+        Session::flash('category_update', 'Successfully updated category!');
+        return redirect('court_category/'.$record->id.'/edit');
     }
 
     /**

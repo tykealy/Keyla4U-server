@@ -15,6 +15,7 @@
     </div>
     {{ Form::close() }}
 
+    <div class="overflow-auto">
     <table class="table mt-3">
         <thead class="table-success text-success">
             <tr>
@@ -66,6 +67,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
     <div>
         <x-btn-danger content="Back" href="{{route('dashboard')}}" />
     </div>

@@ -7,7 +7,7 @@
 
     <x-page-subtitle>Update</x-page-subtitle>
 
-    @if(Session::has('ptich_update'))
+    @if(Session::has('pitch_update'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         <strong>Primary!</strong> {!! session('pitch_update') !!}

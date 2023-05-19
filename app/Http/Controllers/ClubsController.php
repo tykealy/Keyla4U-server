@@ -104,6 +104,8 @@ class ClubsController extends Controller
     public function update(Request $request, string $id)
     {
 
+        
+
         $validator = Validator::make($request->all(), [
             'club_name' => 'required|max:30|min:3',
             'image' => 'mimes:jpg,jpeg,png,gif',

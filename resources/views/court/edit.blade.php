@@ -6,10 +6,10 @@
 <div class="card p-3 m-3">
     <x-page-subtitle>Update</x-page-subtitle>
 
-    @if(Session::has('court_create'))
+    @if(Session::has('court_update'))
     <div class="alert alert-primary alert-dismissible">
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>Primary!</strong> {!! session('court_create') !!}
+        <strong>Primary!</strong> {!! session('court_update') !!}
     </div>
     @endif
     @if (count($errors) > 0 )

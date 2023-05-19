@@ -5,7 +5,7 @@
     
     <div class="card p-3 m-3">
         {{-- panel heading --}}
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success fw-bold" role="alert">
             <div>View your Pitch availability</div>
         </div>
 
@@ -63,10 +63,10 @@
                 </div>
             </div>
 
-            <div class='d-flex '>
-                <div class='card p-3 m-3'>
+            <div class='d-flex'>
+                <div class='card p-3 m-3 w-100'>
                     {{-- listing available time --}}
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success text-center fw-bold" role="alert">
                         <div>Available Time</div>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -79,9 +79,9 @@
                     </ul>
                 </div>
     
-                <div class='card p-3 m-3'>
+                <div class='card p-3 m-3 w-100'>
                     {{-- listing available time --}}
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success text-center fw-bold" role="alert">
                         <div>Unavailable Time</div>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -97,12 +97,14 @@
             </div>
             
         </div>
+
+        <div>
+             <x-btn-danger content="Back" href="{{route('dashboard')}}" />
+        </div>
    
     </div>
     
     
-
-
 <script>
    //auto submit form
     $('#court_id').on('change', function(e) {
