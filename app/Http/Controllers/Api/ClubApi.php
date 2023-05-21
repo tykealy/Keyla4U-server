@@ -4,27 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Club;
-use App\Models\User;
-use App\Models\Club_category;
+use App\Models\Court_category;
+
 
 class ClubApi extends Controller
 {
     public function index()
     {
-        $location = request()->location;
+        $clubs = Club::join('users', 'clubs.user_id', '=', 'users.id')
+            ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone', 'clubs.description', 'clubs.location', "user_id")
+            ->get();
 
-        if ($location == 'all') {
-            $clubs = Club::join('users', 'clubs.user_id', '=', 'users.id')
-                ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone', 'clubs.description', 'clubs.location')
-                ->get();
-            return response()->json($clubs);
-        } else {
-            $clubs = Club::join('users', 'clubs.user_id', '=', 'users.id')
-                ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone', 'clubs.description', 'clubs.location')
-                ->where('clubs.location', 'like', '%' . $location . '%')
-                ->get();
-            return response()->json($clubs);
-        }
+        foreach ($clubs as $club) {
+            $categries =  Court_category::where('user_id', "=", $club->user_id)->pluck('category_name');
+            $club->categories = $categries;
+        };
+        return response()->json($clubs);
     }
 
     public function show($id)
