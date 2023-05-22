@@ -25,9 +25,16 @@ class ClubApi extends Controller
     public function show($id)
     {
         $club = Club::join('users', 'clubs.user_id', '=', 'users.id')
-            ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone')
+            ->select('clubs.id', 'clubs.name', 'clubs.map', 'clubs.image', 'users.phone', 'user_id')
             ->where('clubs.id', $id)
             ->first();
+
+        $categries =  Court_category::join("courts", "court_categories.id", "=", "courts.court_category_id")
+            ->where('court_categories.user_id', "=", $club->user_id)
+            ->select('category_name', "courts.id")->get();
+        $club->categories = $categries;
+
+
         return response()->json($club);
     }
 }
