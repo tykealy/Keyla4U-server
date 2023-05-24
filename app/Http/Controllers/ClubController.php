@@ -101,6 +101,8 @@ class ClubController extends Controller
             'name' => 'max:50|min:3',
             'image' => 'mimes:jpg,jpeg,png,gif',
             'map' => 'min:3',
+            'location' => 'min:3|max:50|',
+            'description' => '',
         ]);
 
 
@@ -110,17 +112,18 @@ class ClubController extends Controller
                 ->withErrors($validator);
         }
 
-        $image = $request->file('image');
-        if ($image === null) {
-            return back()->withErrors(['image' => 'Nothing Changed']);
-        }
-        $upload = 'img/';
-        $filename = time() . $image->getClientOriginalName();
-        move_uploaded_file($image->getPathName(), $upload . $filename);
-
-
         $club = Club::where('user_id', $id)->first();
 
+        if ($request->hasFile('image')) {
+            // Handle file upload
+            $image = $request->file('image');
+            $upload = 'img/';
+            $filename = time() . $image->getClientOriginalName();
+            move_uploaded_file($image->getPathName(), $upload . $filename);
+            $club->image = $filename;
+        }
+
+       
         if ($request->has('name')) {
             $club->name = $request->input('name');
         }
@@ -132,6 +135,14 @@ class ClubController extends Controller
 
         if ($request->has('map')) {
             $club->map = $request->input('map');
+        }
+
+        if ($request->has('location')) {
+            $club->location = $request->input('location');
+        }
+
+        if ($request->has('description')) {
+            $club->description = $request->input('description');
         }
 
         $club->user_id = Auth::id();
