@@ -29,8 +29,9 @@
     {!!Form::label('role', 'Account_role')!!}
     {!!Form::select('role', [1 => 'Admin', 0 => 'SuperAmin'],0,array('class'=>'form-control'))!!}
     <br>
+    <br>
     {{-- button create --}}
-    {!! Form::submit('Create', array('class'=>'btn btn-primary btn-sm')) !!}
+    {!! Form::submit('Create', array('class'=>'btn btn-dark btn-sm')) !!}
     <x-btn-danger href="{{route('super_admin_dashboard')}}" content="Back"/>
     {!!Form::close()!!}
 

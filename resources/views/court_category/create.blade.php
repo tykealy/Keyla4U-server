@@ -5,7 +5,7 @@ $category = [];
 
 @section('content')
 
-<div class="card p-3 m-3">
+<div class="card p-3 m-3 bg-light">
     <x-page-subtitle>Create Category</x-page-subtitle>
 
     @if(Session::has('category_create'))

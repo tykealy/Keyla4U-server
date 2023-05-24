@@ -40,10 +40,10 @@
     {!! Form::text('phone',$user->phone, array('class'=>'form-control')) !!}
     <br>
     {!! Form::label('account_role_id', 'Role:') !!}
-    {!! Form::select('account_role_id',$user_types,$user->account_role_id, array('class'=>'form-select')) !!}
+    {!!Form::select('account_role_id', [1 => 'Admin', 0 => 'SuperAmin'],0,array('class'=>'form-control'))!!}
     <br>
     {!! Form::submit('Update', array('class'=>'btn btn-primary btn-sm')) !!}
-    <x-btn-danger href="{{route('user.index')}}" content="Back"/>
+    <x-btn-danger href="{{ url()->previous() }}" content="Back"/>
     {!! Form::close() !!}
 </div>
 
