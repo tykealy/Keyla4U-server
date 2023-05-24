@@ -18,7 +18,7 @@
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/dashboard">
                 <b>Keyla4U</b>
-                <img id="old-image" src="{{ asset('./img/logo.png') }}" alt="Image" width="50px">
+                <img id="old-image" src="{{ asset('./img/white-logo.png') }}" alt="Image" width="50px">
             </a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
