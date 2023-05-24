@@ -31,3 +31,9 @@ Route::get('/clubs/{id}', [ClubApi::class, 'show']);
 Route::get('/locations', [LocationApi::class, 'index']);
 
 Route::get("/sports", [App\Http\Controllers\Api\SportApi::class, 'index']);
+
+Route::get('/pitches/{courtID}', [App\Http\Controllers\Api\PitchApi::class, 'index']);
+
+Route::get('availableTimes/{pitchID}/{WeekDay}', [App\Http\Controllers\Api\AvailableTimeApi::class, 'index']);
+
+Route::post('availableTimes/book', [App\Http\Controllers\Api\AvailableTimeApi::class, 'book']);
