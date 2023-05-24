@@ -37,6 +37,7 @@ class CourtCategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|max:50|min:3',
+            
         ]);
 
         if ($validator->fails()) {

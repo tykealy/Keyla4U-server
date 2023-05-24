@@ -102,39 +102,48 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'first_name' => 'required|max:30|min:3',
-            'last_name' => 'required|max:30|min:3',
-            'phone' => 'required|numeric|min:10',
-            'email' => 'required|email',
+            'first_name' => 'max:30|min:3',
+            'last_name' => 'max:30|min:3',
+            'phone' => 'numeric|min:10',
+            'email' => 'email',
             'account_role_id' => 'required',
         ]);
-          
-        foreach(User::all() as $user){
-
-            if($user->email == $request->email && $user->id != $id){
-                return redirect('user/update')
+        
+        if (User::where('email', $request->email)->where('id', '<>', $id)->exists()) {
+            return back()
                 ->withInput()
                 ->withErrors(['email' => 'Email already exists.']);
-            }
         }
-
+        
         if ($validator->fails()) {
-            return redirect('user/create')
+            return back()
                 ->withInput()
                 ->withErrors($validator);
         }
+        
 
         $user = User::find($id);
 		// Create The Post
-        
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->phone = $request->phone;
-        $user->email = $request->email;
-        $user->account_role_id = $request->account_role_id;
+    
+        if ($request->has('first_name')) {
+            $user->first_name = $request->first_name;
+        }
+        if ($request->has('last_name')) {
+            $user->last_name = $request->last_name;
+        }
+        if ($request->has('phone')) {
+            $user->phone = $request->phone;
+        }
+        if ($request->has('email')) {
+            $user->email = $request->email;
+        }
+        if ($request->has('account_role_id')) {
+            $user->account_role_id = $request->account_role_id;
+        }
         $user->save();
-		Session::flash('user_update','Data is updated ('.$user->first_name.' '. $user->last_name.')');
-		return redirect('user/'.$user->id.'/edit');
+        Session::flash('user_update','Data is updated ('.$user->first_name.' '. $user->last_name.')');
+        return back();
+        
     }
 
     /**
@@ -145,7 +154,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         Session::flash('user_delete','Data is deleted ('.$user->first_name.' '.$user->last_name.')');
-    	return redirect('user');
+    	return back();
     }
 
     public function getBySearch(Request $request){
