@@ -19,7 +19,7 @@
       <div class="col-lg-12 grid-margin stretch-card mt-3">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Ordered table</h4>
+            <h4 class="card-title">Pitch table</h4>
             <div class="table-responsive pt-3">
               <table class="table table-bordered table-hover">
                 <thead>
