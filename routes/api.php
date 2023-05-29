@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PaymentApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LoginApi;
@@ -36,4 +37,10 @@ Route::get('/pitches/{courtID}', [App\Http\Controllers\Api\PitchApi::class, 'ind
 
 Route::get('availableTimes/{pitchID}/{WeekDay}', [App\Http\Controllers\Api\AvailableTimeApi::class, 'index']);
 
-Route::post('availableTimes/book', [App\Http\Controllers\Api\AvailableTimeApi::class, 'book']);
+Route::post('/availableTimes/book', [App\Http\Controllers\Api\AvailableTimeApi::class, 'book']);
+Route::post('/order', [PaymentApi::class, 'order']);
+Route::get('/payment/{orderId}', [App\Http\Controllers\Api\PaymentApi::class, 'payment']);
+
+// Route::middleware(['cors'])->group(function () {
+//     Route::post('/order', [PaymentApi::class, 'order']);
+// });
