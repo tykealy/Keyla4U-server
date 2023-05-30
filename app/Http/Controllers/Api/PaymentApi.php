@@ -40,14 +40,16 @@ class PaymentApi extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'payment_method' => 'required',
-            'status' => 'required',
+            'order_status' => 'required',
         ]);
+        // return 'hello';
 
         if ($validator->fails()) {
             return back()
                 ->withInput()
                 ->withErrors($validator);
         }
+
 
         $user_id = User::where('email', '=', $request->email)->value('id');
         $pitch = Pitch::findOrFail($request->pitch);
@@ -59,7 +61,7 @@ class PaymentApi extends Controller
         $order->user_id = $user_id;
         $order->pitch_id = $request->pitch;
         $order->total_amount = $unit_price;
-        $order->order_status = $request->status;
+        $order->order_status = $request->order_status;
         $order->booked_date = Carbon::now()->toDateString();
         $order->play_date = $request->play_date;
         $order->start_time = $request->start_time;
@@ -70,11 +72,6 @@ class PaymentApi extends Controller
         $order->payment_method = $request->payment_method;
 
         $order->save();
-        return response(
-            [
-                $order,
-                'status_code' => 201,
-            ]
-        );
+        return response()->json($order, 201);
     }
 }
