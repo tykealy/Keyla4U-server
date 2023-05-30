@@ -41,7 +41,7 @@ Route::get('availableTimes/{pitchID}/{WeekDay}', [App\Http\Controllers\Api\Avail
 Route::post('/availableTimes/book', [App\Http\Controllers\Api\AvailableTimeApi::class, 'book']);
 Route::post('/order', [PaymentApi::class, 'order']);
 Route::get('/payment/{orderId}', [App\Http\Controllers\Api\PaymentApi::class, 'payment']);
-Route::post('/pay/{orderId}', [PayApi::class, 'pay']);
+Route::get('/pay/{orderId}', [PayApi::class, 'pay']);
 
 // Route::middleware(['cors'])->group(function () {
 //     Route::post('/order', [PaymentApi::class, 'order']);
