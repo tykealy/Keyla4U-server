@@ -22,7 +22,7 @@ class PaymentApi extends Controller
         $order = Order::findOrFail($orderId);
         $order_status = $order->order_status;
         $attempt = 1;
-        while ($order_status !== 'Paid' && $attempt <= 10) {
+        while ($order_status !== 'Paid' && $attempt <= 100) {
             sleep(2);
             $order_status = $order->refresh()->order_status;
             $attempt++;
@@ -42,7 +42,6 @@ class PaymentApi extends Controller
             'payment_method' => 'required',
             'order_status' => 'required',
         ]);
-        // return 'hello';
 
         if ($validator->fails()) {
             return back()
@@ -50,17 +49,20 @@ class PaymentApi extends Controller
                 ->withErrors($validator);
         }
 
-
         $user_id = User::where('email', '=', $request->email)->value('id');
         $pitch = Pitch::findOrFail($request->pitch);
         $court = $pitch->court;
         $unit_price = $court->unit_price;
         $customer = User::where('id', $user_id)->first(['first_name', 'last_name', 'phone']);
 
+        $start = Carbon::createFromFormat('H:i:s',  $request->start_time);
+        $end = Carbon::createFromFormat('H:i:s', $request->end_time);
+        $timeDifference = $end->diffInHours($start);
+
         $order = new Order();
         $order->user_id = $user_id;
         $order->pitch_id = $request->pitch;
-        $order->total_amount = $unit_price;
+        $order->total_amount = (int)$unit_price * $timeDifference;;
         $order->order_status = $request->order_status;
         $order->booked_date = Carbon::now()->toDateString();
         $order->play_date = $request->play_date;

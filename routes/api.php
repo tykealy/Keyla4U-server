@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LoginApi;
 use App\Http\Controllers\Api\RegisterUserApi;
 use App\Http\Controllers\Api\ClubApi;
 use App\Http\Controllers\Api\LocationApi;
+use App\Http\Controllers\Api\PayApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::get('availableTimes/{pitchID}/{WeekDay}', [App\Http\Controllers\Api\Avail
 Route::post('/availableTimes/book', [App\Http\Controllers\Api\AvailableTimeApi::class, 'book']);
 Route::post('/order', [PaymentApi::class, 'order']);
 Route::get('/payment/{orderId}', [App\Http\Controllers\Api\PaymentApi::class, 'payment']);
+Route::post('/pay/{orderId}', [PayApi::class, 'pay']);
 
 // Route::middleware(['cors'])->group(function () {
 //     Route::post('/order', [PaymentApi::class, 'order']);
