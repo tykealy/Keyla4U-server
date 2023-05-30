@@ -12,28 +12,42 @@
 Kayla4U is an innovative platform that allows users to easily book sports courts such as football and badminton. With a user-friendly interface, users can view a map of nearby sports clubs and check the availability and hourly rates of each court. With just one click, users can book their desired court and make a secure payment through the platform. In addition, users can also post on the website to find opponent teams for their games. Club owners and administrators can manage court availability and pricing through the platform. When a user books a court, both the club owner and user receive an SMS notification to confirm the booking. The system automatically updates court availability to ensure a seamless booking experience.
 
 
-# Things to do
 
-refresh database.
+
+
+# Getting start
+
+Install composer and node module.
 ```
-php artisan migrate:fresh
+composer i
+npm i
 ```
+
+# create database name keyla4U
+### migrate database
+```
+php artisan migrate
+```
+
 ## seeding user
 ```
 php artisan db:seed --class=UserTableSeeder
 ```
-account: superadmin@gmail.com password:12345678
+**superadmin role: superadmin@gmail.com password:12345678**
+
+**admin role: admin@gmail.com password:12345678**
+
+**user role: user@gmail.com password:12345678**
+
 
 ## Running project
-
-**Running project**
 
 ```
 npm run dev
 php artisan serve
 ```
 
-**Build production**
+## Build production
 
 ```
 npm run build
@@ -43,4 +57,3 @@ npm run build
 
 ## License
 [tk](https://github.com/tykeaboyloy)
-
