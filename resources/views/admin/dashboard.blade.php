@@ -110,6 +110,7 @@
                     <th>Category</th>
                     <th>Pitch Number</th>
                     <th>Unit Price</th>
+                    <th>Total Price</th>
                     <th>Order Status</th>
                     <th>Booked Date</th>
                     <th>Play Date</th>
@@ -128,9 +129,10 @@
                                 <td>{{$count}}</td>
                                 <td>{{$order->customer_name}}</td>
                                 <td>{{$order->customer_phone}}</td>
-                                <td>{{$order->pitch->court->court_category->category_name}}</td>
-                                <td>{{$order->pitch->pitch_num}}</td>
+                                <td>{{$order->category_name}}</td>
+                                <td>{{$order->pitch_num}}</td>
                                 <td>{{$order->unit_price}}$</td>
+                                <td>{{$order->total_amount}}$</td>
                                 <td><div class='btn btn-outline-danger'>{{$order->order_status}}</div></td>
                                 <td>{{$order->booked_date}}</td>
                                 <td>{{$order->play_date}}</td>
@@ -149,6 +151,9 @@
           </div>
         </div>
     </div>
+    {{-- table pagination --}}
+    <br>
+    {{$order_list->links('pagination::bootstrap-5')}}
 
 </div>
 

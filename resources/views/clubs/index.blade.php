@@ -89,5 +89,9 @@
                 </button>
             </a>
         </div>
+
+      {{-- pagination --}}
+      <br>
+      {{$clubs->links("pagination::bootstrap-5")}}
 </div>
 @endsection

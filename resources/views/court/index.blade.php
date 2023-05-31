@@ -72,6 +72,8 @@
     <div>
         <a href="{{route('dashboard')}}"><div class=" btn btn-primary">Back</div></a>
     </div>
-
+    {{-- pagination --}}
+    <br>
+    {{$courts->links('pagination::bootstrap-5')}}
 </div>
 @endsection

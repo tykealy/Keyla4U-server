@@ -22,11 +22,17 @@ class PitchController extends Controller
     public function index()
     {
         $club = Club::where('user_id', '=', Auth::id())->first();
-        $courts = Court::where('club_id', '=', $club->id)->get();
-        $pitches = [];
-        for ($i = 0; $i < count($courts); $i++) {
-            $pitches[] = Pitch::where('court_id', '=', $courts[$i]->id)->get();
-        }
+
+        $pitches = DB::table('pitches')
+            ->join('courts', 'pitches.court_id', '=', 'courts.id')
+            ->join('court_categories', 'courts.court_category_id', '=', 'court_categories.id')
+            ->where('courts.club_id', '=', $club->id)
+            ->select(
+                'pitches.*',
+                'court_categories.category_name'
+            )
+            ->paginate(3);
+
         return view('pitch.index', ['pitches' => $pitches]);
     }
 

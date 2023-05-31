@@ -36,12 +36,11 @@
                     @php
                     $count = 1;
                     @endphp
-                    @foreach ($pitches as $courtPitches)
-                        @foreach ($courtPitches as $pitch)
+                    @foreach ($pitches as $pitch)
                             <tr>
                                 <td>{{$count}}</td>
                                 <td class='text-danger'>Pitch {{$pitch->pitch_num}}</td>
-                                <td class='text-primary'>{{$pitch->court->court_category->category_name}}</td>
+                                <td class='text-primary'>{{$pitch->category_name}}</td>
                                 <td>{{$pitch->size}}</td>
                                 <td><a class="btn btn-primary btn-sm" href="{!!route('pitch.edit',$pitch->id)!!}">Update</a></td>
                                 <td>
@@ -55,7 +54,6 @@
                             @php
                             $count = $count + 1;
                             @endphp
-                        @endforeach
                     @endforeach
                 </tbody>
               </table>
@@ -66,5 +64,8 @@
     <div>
         <a href="{{route('dashboard')}}"><div class=" btn btn-dark">Back</div></a>
     </div>
+    {{-- pagination --}}
+    <br>
+    {{$pitches->links('pagination::bootstrap-5')}}
 </div>
 @endsection
