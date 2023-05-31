@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
 use App\Models\Club;
 use App\Models\Court;
 use App\Models\Pitch;
@@ -39,15 +40,17 @@ class DashboardController extends Controller
             }
     
             //get order list
-            $order_list = collect();
-            foreach($courts as $court){
-                $pitchs = Pitch::where('court_id','=',$court->id)->get();
-                foreach($pitchs as $pitch){
-                    $orders = Order::where('pitch_id','=',$pitch->id)->get();
-                    $order_list = $order_list->push($orders);
-                }
-            }
-            $order_list = $order_list->flatten();
+            $order_list = DB::table('orders')
+            ->join('pitches', 'orders.pitch_id', '=', 'pitches.id')
+            ->join('courts', 'pitches.court_id', '=', 'courts.id')
+            ->join('court_categories', 'courts.court_category_id', '=', 'court_categories.id')
+            ->where('courts.club_id', '=', $club_id->id)
+            ->select(
+                'orders.*',
+                'court_categories.category_name',
+                'pitches.pitch_num'
+            )
+            ->paginate(4);
     
             return view('admin.dashboard')
                 ->with('court_count',$court_count)
@@ -69,7 +72,7 @@ class DashboardController extends Controller
         //get number of users
         $users = User::count();
         //get user list
-        $users_list = User::all();
+        $users_list = User::orderBy('account_role_id')->paginate(4);
 
         return view('super_admin.superDashboard')
             ->with('orders',$orders)

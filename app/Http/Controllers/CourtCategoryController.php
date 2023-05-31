@@ -17,7 +17,7 @@ class CourtCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Court_category::where('user_id', '=', Auth::id())->paginate('5');
+        $categories = Court_category::where('user_id', '=', Auth::id())->paginate(4);
 
         return view('court_category.index')->with('categories', $categories);
     }

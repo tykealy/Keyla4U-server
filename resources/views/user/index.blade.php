@@ -91,5 +91,8 @@
             </button>
         </a>
     </div>
+    {{-- pagination --}}
+    <br>
+    {{$users->links('pagination::bootstrap-5')}}
 </div>
 @endsection

@@ -20,7 +20,7 @@ class CourtController extends Controller
     public function index()
     {
         $club = Club::where('user_id', '=', Auth::id())->first();
-        $courts = Court::where('club_id', '=',$club->id)->get();
+        $courts = Court::where('club_id', '=',$club->id)->paginate(3);
         return view('court.index')->with('courts',$courts);
     }
 

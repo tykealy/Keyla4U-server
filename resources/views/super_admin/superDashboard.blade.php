@@ -159,7 +159,9 @@
         </div>
         {{-- end table --}}
     </div>
-   
+   {{-- pagination --}}
+   <br>
+   {{$users_list->links('pagination::bootstrap-5')}}
 </div>
 
 {{-- chart script --}}

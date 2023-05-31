@@ -28,17 +28,19 @@ class OrderController extends Controller
         $courts = Court::where('club_id','=',$club_id->id)->get();
 
         //get order list
-        $order_list = collect();
-        foreach($courts as $court){
-            $pitchs = Pitch::where('court_id','=',$court->id)->get();
-            foreach($pitchs as $pitch){
-                $orders = Order::where('pitch_id','=',$pitch->id)->get();
-                $order_list = $order_list->push($orders);
-            }
-        }
-        $order_list = $order_list->flatten();
-
         
+        $order_list = DB::table('orders')
+        ->join('pitches', 'orders.pitch_id', '=', 'pitches.id')
+        ->join('courts', 'pitches.court_id', '=', 'courts.id')
+        ->join('court_categories', 'courts.court_category_id', '=', 'court_categories.id')
+        ->where('courts.club_id', '=', $club_id->id)
+        ->select(
+            'orders.*',
+            'court_categories.category_name',
+            'pitches.pitch_num'
+        )
+        ->paginate(4);
+
         return view('order.index')->with('order_list', $order_list);
     }
 

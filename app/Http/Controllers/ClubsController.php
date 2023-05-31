@@ -16,7 +16,7 @@ class ClubsController extends Controller
      */
     public function index()
     {
-        $clubs = Club::all();
+        $clubs = Club::orderBy('name')->paginate(4);
 
         return view('clubs.index', [
             'clubs' => $clubs,
