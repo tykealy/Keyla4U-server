@@ -48,9 +48,9 @@ require __DIR__ . '/auth.php';
 
 // pitch available time 
     Route::get('pitch_available_time', [availableTimeController::class, 'index'])->middleware('admin')->name('available_time.index');
-    Route::Post('getPitch', [availableTimeController::class, 'getPitch'])->middleware('admin')->name('available_time.getPitch');
-    Route::Post('getDate', [availableTimeController::class, 'getDate'])->middleware('admin')->name('available_time.getDate');
-    Route::Post('getAvailableTime', [availableTimeController::class, 'getAvailableTime'])->middleware('admin')->name('available_time.getAvailableTime');
+    Route::GET('getPitch', [availableTimeController::class, 'getPitch'])->middleware('admin')->name('available_time.getPitch');
+    Route::GET('getDate', [availableTimeController::class, 'getDate'])->middleware('admin')->name('available_time.getDate');
+    Route::GET('getAvailableTime', [availableTimeController::class, 'getAvailableTime'])->middleware('admin')->name('available_time.getAvailableTime');
 //favorite
     Route::get('/favorite', function(){return view('favorite.index');})->middleware('admin')->name('favorite.index');
 //order
