@@ -46,7 +46,7 @@
 {{-- time listing --}}
  <div class="card m-3 p-3">
     <h4 class="card-title">Listing Times</h4>
-    <p class="card-description">Color identify <strong class='text-info'>Teal</strong> = available Time | <strong class="text-secondary">Gray</strong> = Unavailable Time</p>
+    <p class="card-description">Color meaning <strong class='text-info'>Teal</strong> = available Time | <strong class="text-secondary">Gray</strong> = Unavailable Time</p>
         <div id='availableTime' class="template-demo">
             {{-- dynamic inject from javascript --}}
         </div>
