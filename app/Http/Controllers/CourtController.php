@@ -95,7 +95,7 @@ class CourtController extends Controller
     public function update(Request $request, string $id)
     {   
         
-        $open_time = Carbon::createFromFormat('H:i', $request->open_time)->format('H:i'); 
+        $open_time = Carbon::createFromFormat('H:i:s', $request->open_time)->format('H:i'); 
         $close_time = Carbon::createFromFormat('H:i', $request->close_time)->format('H:i');
 
         $request->merge([
