@@ -31,90 +31,47 @@ class availableTimeController extends Controller
     public function getPitch(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'court_id' => 'required|exists:court,id',
+            'court' => 'required|exists:court,id',
         ]);
 
-        $club = Club::where('user_id', '=', Auth::id())->first();
-        $courts = Court::where('club_id', '=',$club->id)->get();
+        $court = $request->input('court');
+        // Query the database to get the available pitches for the selected court
+        $pitches = Pitch::where('court_id','=', $court)->pluck('pitch_num', 'id');
 
-        $pitches = Pitch::where('court_id', '=', $request->court_id)->get();
-        return view('available_pitch.pitch_available_time')->with('courts', $courts)->with('pitches', $pitches);
+        return response()->json($pitches);
     }
 
 
     public function getDate(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'pitch_id' => 'required|exists:pitch,id',
+            'pitch' => 'required|exists:pitch,id',
         ]);
 
-        $club = Club::where('user_id', '=', Auth::id())->first();
-        $courts = Court::where('club_id', '=',$club->id)->get();
-
-        $court_id = Pitch::where('id', '=', $request->pitch_id)->first();
-        $pitches = Pitch::where('court_id', '=', $court_id->court_id)->get();
-
-        $date = Pitch_avalible_time::where('pitch_id', '=', $request->pitch_id)
+        // Query the database to get the date for the selected pitch
+        $date = Pitch_avalible_time::where('pitch_id', '=', $request->pitch)
                 ->select('week_day')
                 ->distinct()
-                ->get();
-        
-        return view('available_pitch.pitch_available_time')
-            ->with('courts', $courts)
-            ->with('pitches', $pitches)
-            ->with('dates', $date)
-            ->with('pitch_id', $request->pitch_id);
+                ->pluck('week_day','week_day');
+
+        return response()->json($date);
+
     }
 
     public function getAvailableTime(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'date' => 'required|exists:Pitch_avalible_time,week_day',
-            'pitch_id' => 'required|exists:Pitch,id',
+            'pitch' => 'required|exists:Pitch,id',
         ]);
 
-        //get all courts
-        $club = Club::where('user_id', '=', Auth::id())->first();
-        $courts = Court::where('club_id', '=',$club->id)->get();
-
-        //get all pitches
-        $court_id = Pitch::where('id', '=',$request->pitch_id)->select('court_id')->first();
-        $pitches = Pitch::where('court_id', '=', $court_id)->get();
-
-
-        //get all date that relate to the pitch
-        $date = Pitch_avalible_time::where('pitch_id', '=', $request->pitch_id)
-                ->select('week_day')
-                ->distinct()
-                ->get();
         
         $availableTime = Pitch_avalible_time::where('week_day', '=', $request->date)
-            ->where('availability', '=', 1)
-            ->where('pitch_id', '=', $request->pitch_id)
-            ->select('start_time','end_time')
+            ->where('pitch_id', '=', $request->pitch)
+            ->select('start_time','end_time','availability')
             ->get();
 
-        $unavailableTime = Pitch_avalible_time::where('week_day', '=', $request->date)
-            ->where('availability', '=', 0)
-            ->where('pitch_id', '=', $request->pitch_id)
-            ->select('start_time','end_time')
-            ->get();
-        
-        return view('available_pitch.pitch_available_time')
-            ->with('courts', $courts)
-            ->with('pitches', $pitches)
-            ->with('dates', $date)
-            ->with('availableTimes', $availableTime)
-            ->with('unavailableTimes', $unavailableTime)
-            ->with('pitch_id', $request->pitch_id);
+        return response()->json(['availableTime' => $availableTime]);
     }
     
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

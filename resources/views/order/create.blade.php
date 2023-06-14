@@ -137,7 +137,6 @@
         
         // get pitch by court values can change the pitch select option
         $('select[name="court"]').on('change', function() {
-            console.log('change');
             var court = $(this).val();
 
                 $.ajax({
