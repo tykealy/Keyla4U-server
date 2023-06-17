@@ -11,6 +11,6 @@ class CustomerOrderApi extends Controller
     public function index($userID)
     {
         $orders = Order::where('user_id', $userID)->get();
-        return $orders;
+        return  response()->json($orders);
     }
 }
