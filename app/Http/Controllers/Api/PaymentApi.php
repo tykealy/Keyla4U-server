@@ -28,8 +28,7 @@ class PaymentApi extends Controller
             $attempt++;
         }
 
-        // return response()->json($order_status);
-        return response()->view('ordered');
+        return response()->json($order_status);
     }
 
     public function order(Request $request)
