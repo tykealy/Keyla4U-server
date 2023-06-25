@@ -17,7 +17,8 @@ class CustomerOrderApi extends Controller
             ->join('court_categories', 'courts.court_category_id', '=', 'court_categories.id')
             ->where('orders.user_id', $userID)
             ->where('orders.order_status', 'Paid')
-            ->select('orders.booked_date','orders.play_date', 'orders.start_time', 'orders.end_time', 'orders.total_amount', 'pitches.pitch_num', 'clubs.name', 'clubs.map', 'clubs.image', 'court_categories.category_name')
+            ->select('orders.id', 'orders.booked_date', 'orders.play_date', 'orders.start_time', 'orders.end_time', 'orders.total_amount', 'pitches.pitch_num', 'clubs.name', 'clubs.map', 'clubs.image', 'court_categories.category_name')
+            ->orderByDesc('orders.id')
             ->get();
         return  response()->json($orders);
     }
